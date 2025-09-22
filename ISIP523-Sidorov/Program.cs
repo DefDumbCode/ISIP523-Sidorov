@@ -14,6 +14,17 @@ while (input != "3")
         case "1":
             ProductAdd();
             break;
+        case "2":
+            ProductDelete();
+            break; 
+        case "3":
+            ProductPurchase();
+            break;
+         case "4":
+            ProductSell();
+            break;
+        case "5":
+            break;
     }
 }
 
@@ -50,6 +61,47 @@ void ProductAdd()
     ProductsList.Add(NewProd);
 
 }
+
+
+void ProductDelete()
+{
+    Console.Write("Введите индекс товара:");
+    int rem = int.Parse(Console.ReadLine());
+    ProductsList.RemoveAt(rem);
+}
+
+
+void ProductPurchase()
+{
+    Console.Write("Введите индекс товара:");
+    int purch = int.Parse(Console.ReadLine());
+
+    Console.Write("Введите кол-во заказываемого товара:");
+    int amount = int.Parse(Console.ReadLine());
+    while (amount < 0) 
+    { 
+        Console.WriteLine("Нельзя заказать отрицательное кол-во товара! Для продажи используйте другую функцию.");
+    }
+    ProductsList[purch].ProductQuantity += amount;
+}
+
+
+void ProductSell()
+{
+    Console.Write("Введите индекс товара:");
+    int purch = int.Parse(Console.ReadLine());
+
+    Console.Write("Введите кол-во продаваемого товара:");
+    int amount = int.Parse(Console.ReadLine());
+    while (amount > ProductsList[purch].ProductQuantity)
+    {
+        Console.WriteLine("Нельзя продать больше товаров, чем имеется на складе!");
+        amount = int.Parse(Console.ReadLine());
+    }
+
+    ProductsList[purch].ProductQuantity -= amount;
+}
+
 
 public enum ProductCategory
 {
