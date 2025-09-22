@@ -38,11 +38,23 @@ void ProductAdd()
     Console.Write("Введите цену товара: ");
     double price = double.Parse(Console.ReadLine());
 
+    while (price <= 0)
+    {
+        Console.WriteLine("Цена не должна быть отрицательной и равной нулю");
+        price = int.Parse(Console.ReadLine());
+    }
+
     Console.Write("Введите кол-во товара: ");
     int quantity = int.Parse(Console.ReadLine());
 
+    while (quantity < 0)
+    {
+        Console.WriteLine("Невозможно иметь отрицательое кол-во товаров на складе");
+        quantity = int.Parse(Console.ReadLine());
+    }
+
     bool have = true;
-    if (quantity < 0)
+    if (quantity == 0)
     {
         have = false;
     }
@@ -93,9 +105,9 @@ void ProductSell()
 
     Console.Write("Введите кол-во продаваемого товара:");
     int amount = int.Parse(Console.ReadLine());
-    while (amount > ProductsList[purch].ProductQuantity)
+    while (amount > ProductsList[purch].ProductQuantity && amount < 0)
     {
-        Console.WriteLine("Нельзя продать больше товаров, чем имеется на складе!");
+        Console.WriteLine("Неправильное количество продаваемых товаров!");
         amount = int.Parse(Console.ReadLine());
     }
 
