@@ -30,22 +30,20 @@ void ProductAdd()
     Console.Write("Введите кол-во товара: ");
     int quantity = int.Parse(Console.ReadLine());
 
-    if (quantity > 0)
+    bool have = true;
+    if (quantity < 0)
     {
-        bool have = true;
+        have = false;
     }
-    else
-    {
-        bool have = false;
-    }
-        Console.WriteLine("Введите индекс категории:\n" +
-            "1 - Овощи\n" +
-            "2 - Фрукты\n" +
-            "3 - Молочная продукция\n" +
-            "4 - Мясо и Рыба\n" +
-            "5 - Снэки\n" +
-            "6 - Сладости\n" +
-            "7 - Выпечка");
+ 
+    Console.WriteLine("Введите индекс категории:\n" +
+        "1 - Овощи\n" +
+        "2 - Фрукты\n" +
+        "3 - Молочная продукция\n" +
+        "4 - Мясо и Рыба\n" +
+        "5 - Снэки\n" +
+        "6 - Сладости\n" +
+        "7 - Выпечка");
     ProductCategory cat = (ProductCategory)int.Parse(Console.ReadLine());
 
     Product NewProd = new Product(Product.Count, name, price, quantity, have, cat);
