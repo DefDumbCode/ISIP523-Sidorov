@@ -1,13 +1,17 @@
 ﻿
+using System.Runtime;
+
 List<Product> ProductsList = new List<Product>();
 string input = " ";
-while (input != "3")
+while (input != "6")
 {
-    Console.WriteLine("1. Добавить новый элемент:");
-    Console.WriteLine("2. Удалить элемент:");
-    Console.WriteLine("3. Заказать поставку товара:");
-    Console.WriteLine("4. Продать товар:");
-    Console.WriteLine("5. Поск:");
+    Console.WriteLine("/_____________________/");
+    Console.WriteLine("1. Добавить новый элемент.");
+    Console.WriteLine("2. Удалить элемент.");
+    Console.WriteLine("3. Заказать поставку товара.");
+    Console.WriteLine("4. Продать товар.");
+    Console.WriteLine("5. Поск.");
+    Console.WriteLine("6. Выход.");
     input = Console.ReadLine();
     switch (input)
     {
@@ -24,7 +28,15 @@ while (input != "3")
             ProductSell();
             break;
         case "5":
+            ProductSearch();
             break;
+        case "6":
+            break;
+    }
+    foreach (Product product in ProductsList)
+    {
+        Output(product);
+        Console.WriteLine();
     }
 }
 
@@ -79,14 +91,14 @@ void ProductDelete()
 {
     Console.Write("Введите индекс товара:");
     int rem = int.Parse(Console.ReadLine());
-    ProductsList.RemoveAt(rem);
+    ProductsList.RemoveAt(rem - 1);
 }
 
 
 void ProductPurchase()
 {
     Console.Write("Введите индекс товара:");
-    int purch = int.Parse(Console.ReadLine());
+    int purch = int.Parse(Console.ReadLine()) - 1;
 
     Console.Write("Введите кол-во заказываемого товара:");
     int amount = int.Parse(Console.ReadLine());
@@ -101,7 +113,7 @@ void ProductPurchase()
 void ProductSell()
 {
     Console.Write("Введите индекс товара:");
-    int purch = int.Parse(Console.ReadLine());
+    int purch = int.Parse(Console.ReadLine()) - 1;
 
     Console.Write("Введите кол-во продаваемого товара:");
     int amount = int.Parse(Console.ReadLine());
@@ -115,9 +127,78 @@ void ProductSell()
 }
 
 
+void ProductSearch()
+{
+    Console.WriteLine("Введите категорию поиска:\n" +
+        "1. ID.\n" +
+        "2. Название.\n" +
+        "3. Категория.\n");
+    int search_cat = int.Parse(Console.ReadLine());
+
+    switch (search_cat)
+    {
+        case 1:
+            Console.Write("ID: ");
+            int search_id = int.Parse(Console.ReadLine()) - 1;
+            foreach (Product product in ProductsList) 
+            {
+                if (search_id == product.ProductId) 
+                {
+                    Output(product);
+                    Console.WriteLine();
+                }
+            }
+            break;
+        case 2:
+            Console.Write("Поиск: ");
+            string search_name = Console.ReadLine().ToLower();
+            foreach (Product product in ProductsList) 
+            {
+                if (search_name == product.ProductName) 
+                {
+                    Output(product);
+                    Console.WriteLine();
+                }
+            }
+            break;
+         case 3:
+            Console.WriteLine("Введите индекс категории:\n" +
+        "1 - Овощи\n" +
+        "2 - Фрукты\n" +
+        "3 - Молочная продукция\n" +
+        "4 - Мясо и Рыба\n" +
+        "5 - Снэки\n" +
+        "6 - Сладости\n" +
+        "7 - Выпечка");
+            ProductCategory search_category = (ProductCategory)int.Parse(Console.ReadLine());
+            foreach (Product product in ProductsList) 
+            {
+                if (search_category == product.Category)
+                {
+                    Output(product);
+                    Console.WriteLine();
+                }
+            }
+            break;
+    }
+    
+
+}
+
+
+void Output(Product product)
+{
+    Console.WriteLine($"ID товара: {product.ProductId}\n" +
+        $"Наименование товара: {product.ProductName}\n" +
+        $"Цена товара: {product.ProductPrice}\n" +
+        $"Количество на складе: {product.ProductQuantity}\n" +
+        $"Наличие: {product.ProductHave}\n" +
+        $"Категория товара: {product.Category}");
+}
+
 public enum ProductCategory
 {
-    Vegetables,
+    Vegetables = 1,
     Fruits,
     Dairy_Products,
     Meat_n_Phish,
@@ -128,7 +209,7 @@ public enum ProductCategory
 
 public class Product
 {
-    public static int Count = 0;
+    public static int Count = 1;
 
     public int ProductId;
     public string ProductName;
