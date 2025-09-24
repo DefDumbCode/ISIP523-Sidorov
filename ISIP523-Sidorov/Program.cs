@@ -5,7 +5,7 @@ List<Product> ProductsList = new List<Product>();
 string input = " ";
 while (input != "6")
 {
-    Console.WriteLine("/_____________________/");
+    Console.WriteLine("\n/_____________________/");
     Console.WriteLine("1. Добавить новый элемент.");
     Console.WriteLine("2. Удалить элемент.");
     Console.WriteLine("3. Заказать поставку товара.");
@@ -31,6 +31,8 @@ while (input != "6")
             ProductSearch();
             break;
         case "6":
+            break;
+        default: Console.WriteLine("Неправильная команда!");
             break;
     }
     foreach (Product product in ProductsList)
@@ -90,8 +92,13 @@ void ProductAdd()
 void ProductDelete()
 {
     Console.Write("Введите индекс товара:");
-    int rem = int.Parse(Console.ReadLine());
-    ProductsList.RemoveAt(rem - 1);
+    int rem = int.Parse(Console.ReadLine()) - 1;
+    while (rem < 0 || rem > ProductsList.Count - 1)
+    {
+        Console.WriteLine("Неправильный индекс!");
+        rem = int.Parse(Console.ReadLine());
+    }
+    ProductsList.RemoveAt(rem);
 }
 
 
@@ -99,6 +106,12 @@ void ProductPurchase()
 {
     Console.Write("Введите индекс товара:");
     int purch = int.Parse(Console.ReadLine()) - 1;
+
+    while (purch < 0 || purch > ProductsList.Count - 1)
+    {
+        Console.WriteLine("Неправильный индекс!");
+        purch = int.Parse(Console.ReadLine());
+    }
 
     Console.Write("Введите кол-во заказываемого товара:");
     int amount = int.Parse(Console.ReadLine());
@@ -115,15 +128,26 @@ void ProductSell()
     Console.Write("Введите индекс товара:");
     int purch = int.Parse(Console.ReadLine()) - 1;
 
+    while (purch < 0 || purch > ProductsList.Count - 1) 
+    {
+        Console.WriteLine("Неправильный индекс!");
+        purch = int.Parse(Console.ReadLine());
+    }
+
     Console.Write("Введите кол-во продаваемого товара:");
     int amount = int.Parse(Console.ReadLine());
-    while (amount > ProductsList[purch].ProductQuantity && amount < 0)
+    while (ProductsList[purch].ProductQuantity - amount < 0 || amount < 0)
     {
         Console.WriteLine("Неправильное количество продаваемых товаров!");
         amount = int.Parse(Console.ReadLine());
     }
-
+    Console.Write("Введите адрес доставки: ");
+    string address = Console.ReadLine();
     ProductsList[purch].ProductQuantity -= amount;
+    if (ProductsList[purch].ProductQuantity == 0) 
+    {
+        ProductsList[purch].ProductHave = false;
+    }
 }
 
 
@@ -133,16 +157,21 @@ void ProductSearch()
         "1. ID.\n" +
         "2. Название.\n" +
         "3. Категория.\n");
-    int search_cat = int.Parse(Console.ReadLine());
+    int search_cat = int.Parse(Console.ReadLine()) - 1;
 
     switch (search_cat)
     {
         case 1:
             Console.Write("ID: ");
             int search_id = int.Parse(Console.ReadLine()) - 1;
+            while (search_id < 0 || search_id > ProductsList.Count - 1)
+            {
+                Console.WriteLine("Неправильный индекс!");
+                search_id = int.Parse(Console.ReadLine());
+            }
             foreach (Product product in ProductsList) 
             {
-                if (search_id == product.ProductId) 
+                if (search_id - 1 == product.ProductId) 
                 {
                     Output(product);
                     Console.WriteLine();
