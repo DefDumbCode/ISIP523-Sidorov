@@ -45,4 +45,19 @@ while (input != "6")
             break;
     }
 }
-  
+void TextAdd()
+{
+    Console.WriteLine("Введите строку (не менее 100 символов):");
+    string text = Console.ReadLine();
+    while (text == null || text.Length < 100)
+    {
+        Console.WriteLine("Длина текста должна быть не менее 100 символов");
+        text = Console.ReadLine();
+    }
+    Texts.Add(text);
+    Console.WriteLine("Текст успешно добавлен");
+}
+
+
+
+
