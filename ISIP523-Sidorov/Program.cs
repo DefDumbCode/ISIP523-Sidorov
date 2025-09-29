@@ -172,6 +172,3 @@ void TextStat()
     }
     Stats.Add(stat);
 }
-
-
-
