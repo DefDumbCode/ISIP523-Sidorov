@@ -58,6 +58,18 @@ void TextAdd()
     Console.WriteLine("Текст успешно добавлен");
 }
 
+void TextView()
+{
+    Console.Write("Введите ID текста: ");
+    int id = int.Parse(Console.ReadLine()) - 1;
+    while (id < 0 || id > Texts.Count - 1)
+    {
+        Console.WriteLine("Неправильный индекс!");
+        Console.Write("Введите ID текста: ");
+        id = int.Parse(Console.ReadLine()) - 1;
+    }
+    Console.WriteLine(Texts[id]);
+}
 
 
 
