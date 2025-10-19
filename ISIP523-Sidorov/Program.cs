@@ -2,12 +2,12 @@
 
 List<Book> BooksList = new List<Book> 
 {
-    new Book(1, "Этюд в багроых тонах", "Артур Конан Дойл", Genre.Detective, 899),
-    new Book(2, "Затерянный мир", "Артур Конан Дойл", Genre.SciFi, 799),
-    new Book(3, "Гарри Поттер и философский камень",  "Джоан Кэтлин Роулинг", Genre.Fantasy, 699),
-    new Book(4, "Гарри Поттер и Тайная комната", "Джоан Кэтлин Роулинг", Genre.Fantasy, 799),
-    new Book(5, "Гарри Поттер и Узник Азкабана", "Джоан Кэтлин Роулинг", Genre.Fantasy, 749),
-    new Book(6, "Евгений Онегин", "Александр Сергеевич Пушкин", Genre.Roman, 899)
+    new Book(1, "Этюд в багроых тонах", "Артур Конан Дойл", Genre.Detective, 1887, 899),
+    new Book(2, "Затерянный мир", "Артур Конан Дойл", Genre.SciFi, 1912, 799),
+    new Book(3, "Гарри Поттер и философский камень",  "Джоан Кэтлин Роулинг", Genre.Fantasy, 1997, 699),
+    new Book(4, "Гарри Поттер и Тайная комната", "Джоан Кэтлин Роулинг", Genre.Fantasy, 1998, 799),
+    new Book(5, "Гарри Поттер и Узник Азкабана", "Джоан Кэтлин Роулинг", Genre.Fantasy, 1999, 749),
+    new Book(6, "Евгений Онегин", "Александр Сергеевич Пушкин", Genre.Roman, 1833, 899)
 };
 
 string input = " ";
@@ -26,19 +26,19 @@ while (input != "7")
     {
         case "1":
             BookAdd();
-            BooksOutput();
+            BooksOutput(BooksList);
             Console.WriteLine("Книга успешно добавлена!");
             break;
         case "2":
             BookDelete();
-            BooksOutput();
+            BooksOutput(BooksList);
             Console.WriteLine("Книга успешно удалена!");
             break;
         case "3":
             BookSearch();
             break;
         case "4":
-            //BookSort();
+            BookSort();
             break;
         case "5":
             //BookMaxMin();
@@ -106,7 +106,10 @@ void BookAdd()
     }
 
 
-    Book newBook = new Book(Book.Count, name, author, genre, price);
+    Console.Write("Введите год издания:");
+    int year = SafeIntInput();
+
+    Book newBook = new Book(Book.Count, name, author, genre, year, price);
     BooksList.Add(newBook);
 
 }
@@ -132,9 +135,10 @@ void BookSearch()
         "2. Название.\n" +
         "3. Жанр.\n" +
         "4. Автор\n" +
-        "5. Цена");
+        "5. Цена\n" +
+        "6. Год издания");
     int search_cat = SafeIntInput();
-    while (search_cat <= 0 ||  search_cat > 5) 
+    while (search_cat <= 0 ||  search_cat > 6) 
     {
         Console.WriteLine("Введена неправильная категория поиска!");
         Console.Write("Введите категорию поиска: ");
@@ -235,13 +239,60 @@ void BookSearch()
                 Output(book);
             }
             break;
+        case 6:
+            Console.Write("Минимальный год: ");
+            int search_min_year = SafeIntInput();
+
+            Console.Write("Максимальный год: ");
+            int search_max_year = SafeIntInput();
+            while (search_min_year > search_max_year)
+            {
+                Console.WriteLine("Установлен неправильный год!");
+                Console.Write("Максимальный год: ");
+                search_max_price = SafeIntInput();
+            }
+
+            var search_by_year = BooksList.Where(b => b.BookYear <= search_max_year && b.BookYear >= search_min_year).ToList();
+            foreach (var book in search_by_year)
+            {
+                Output(book);
+            }
+            break;
     }
 }
 
 void BookSort()
 {
     Console.WriteLine("Выберите категорию сортировки:\n" +
-        "1. ");
+        "1. Название\n" +
+        "2. Год издания\n" +
+        "3. ID");
+    int sort_cat = SafeIntInput();
+    while (sort_cat <= 0 || sort_cat > 3) 
+    {
+        Console.WriteLine("Введена неправильная категория сортировки!");
+        Console.Write("Введите категорию сортировки: ");
+        sort_cat = SafeIntInput();
+    }
+
+    switch (sort_cat)
+    {
+        case 1: 
+            var sorted_list_name = BooksList.OrderBy(b =>  b.BookName).ToList();
+            BooksOutput(sorted_list_name);
+            BooksList = sorted_list_name;
+            break; 
+        case 2:
+            var sorted_list_year = BooksList.OrderBy(b => b.BookYear).ToList();
+            BooksOutput(sorted_list_year);
+            BooksList = sorted_list_year;
+            break;
+        case 3:
+            var sorted_list_id = BooksList.OrderBy(b => b.BookYear).ToList();
+            BooksOutput(sorted_list_id);
+            BooksList = sorted_list_id;
+            break;
+    }
 }
 
 void Output(Book book)
@@ -250,12 +301,13 @@ void Output(Book book)
         $"Название книги: {book.BookName}\n" +
         $"Автор: {book.BookAuthor}\n" +
         $"Жанр: {book.BookGenre}\n" +
+        $"Год издания: {book.BookYear}\n" +
         $"Цена: {book.BookPrice}");
 }
 
-void BooksOutput()
+void BooksOutput(List<Book> list)
 {
-    foreach (Book book in BooksList)
+    foreach (Book book in list)
     {
         Output(book);
         Console.WriteLine();
@@ -280,15 +332,17 @@ public class Book
     public string BookName;
     public string BookAuthor;
     public Genre BookGenre;
+    public int BookYear;
     public int BookPrice;
 
 
-    public Book(int bookId, string bookName, string bookAuthor, Genre bookGenre, int bookPrice)
+    public Book(int bookId, string bookName, string bookAuthor, Genre bookGenre, int bookYear, int bookPrice)
     {
         BookId = bookId;
         BookName = bookName;
         BookAuthor = bookAuthor;
         BookGenre = bookGenre;
+        BookYear = bookYear;
         BookPrice = bookPrice;
     }
 }
