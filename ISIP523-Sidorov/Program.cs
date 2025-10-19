@@ -153,13 +153,11 @@ void BookSearch()
                 Console.Write("ID: ");
                 search_id = SafeIntInput();
             }
-            foreach (Book book in BooksList)
+      
+            var search_by_id = BooksList.Where(b => b.BookId == search_id).ToList();
+            foreach (var book in search_by_id)
             {
-                if (search_id == book.BookId)
-                {
-                    Output(book);
-                    Console.WriteLine();
-                }
+                Output(book);
             }
             break;
 
@@ -167,13 +165,10 @@ void BookSearch()
         case 2:
             Console.Write("Поиск: ");
             string search_name = Console.ReadLine().ToLower();
-            foreach (Book book in BooksList)
+            var search_by_name = BooksList.Where(b => b.BookName.ToLower().Contains(search_name)).ToList();
+            foreach (var book in search_by_name)
             {
-                if (book.BookName.ToLower().Contains(search_name))
-                {
-                    Output(book);
-                    Console.WriteLine();
-                }
+                Output(book);
             }
             break;
 
@@ -196,13 +191,10 @@ void BookSearch()
         genreID = SafeIntInput();
     }
     Genre search_genre = (Genre)genreID;
-            foreach (Book book in BooksList)
+            var search_by_genre = BooksList.Where(b => b.BookGenre == search_genre).ToList();
+            foreach (var book in search_by_genre)
             {
-                if (search_genre == book.BookGenre)
-                {
-                    Output(book);
-                    Console.WriteLine();
-                }
+                Output(book);
             }
             break;
 
@@ -210,13 +202,10 @@ void BookSearch()
         case 4:
             Console.Write("Поиск: ");
             string search_author = Console.ReadLine().ToLower();
-            foreach (Book book in BooksList)
+            var search_by_author = BooksList.Where(b => b.BookAuthor.ToLower().Contains(search_author)).ToList();
+            foreach (var book in search_by_author)
             {
-                if (book.BookAuthor.ToLower().Contains(search_author))
-                {
-                    Output(book);
-                    Console.WriteLine();
-                }
+                Output(book);
             }
             break;
 
@@ -233,25 +222,27 @@ void BookSearch()
 
             Console.Write("Максимальная цена: ");
             int search_max_price = SafeIntInput();
-            while (search_max_price <= 0)
+            while (search_max_price <= 0 || search_min_price > search_max_price)
             {
                 Console.WriteLine("Установлена неправильная цена!");
                 Console.Write("Максимальная цена: ");
                 search_max_price = SafeIntInput();
             }
 
-            foreach (Book book in BooksList)
+            var search_by_price = BooksList.Where(b => b.BookPrice <= search_max_price && b.BookPrice >= search_min_price).ToList();
+            foreach (var book in search_by_price)
             {
-                if (search_min_price <= book.BookPrice && search_max_price >= book.BookPrice)
-                {
-                    Output(book);
-                    Console.WriteLine();
-                }
+                Output(book);
             }
             break;
     }
 }
 
+void BookSort()
+{
+    Console.WriteLine("Выберите категорию сортировки:\n" +
+        "1. ");
+}
 
 void Output(Book book)
 {
