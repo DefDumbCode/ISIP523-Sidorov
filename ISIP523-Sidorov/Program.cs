@@ -41,10 +41,10 @@ while (input != "7")
             BookSort();
             break;
         case "5":
-            //BookMaxMin();
+            BookMaxMin();
             break;
         case "6":
-            //BookGroup();
+            BookGroup();
             break;
         case "7":
             break;
@@ -292,6 +292,28 @@ void BookSort()
             BooksOutput(sorted_list_id);
             BooksList = sorted_list_id;
             break;
+    }
+}
+
+void BookMaxMin()
+{
+    var max_price = BooksList.MaxBy(b => b.BookPrice);
+    Console.WriteLine($"Самая дорогая книга: ");
+    Output(max_price);
+
+    Console.WriteLine("");
+
+    var min_price = BooksList.MinBy(b => b.BookPrice);
+    Console.WriteLine($"Самая дешёвая книга: ");
+    Output(min_price);
+}
+
+void BookGroup()
+{
+    var authors = BooksList.GroupBy(b=> b.BookAuthor).ToList();
+    foreach (var author in authors)
+    {
+        Console.WriteLine($"{author.Key} | {author.Count()}");
     }
 }
 
