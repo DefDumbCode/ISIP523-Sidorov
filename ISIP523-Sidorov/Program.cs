@@ -1,4 +1,6 @@
-﻿List<Student> Students = new List<Student>();
+﻿using System.Runtime.InteropServices;
+
+List<Student> Students = new List<Student>();
 List<Course> Courses = new List<Course>();
 List <Teacher> Teachers = new List<Teacher>();
 
@@ -23,8 +25,28 @@ while (input != "7")
             TeacherAdd();
             break;
         case"3":
-            break;
+            if (Teachers.Count > 0)
+            {
+                CourseCreate();
+            }
+            else
+            {
+                Console.WriteLine("В базе нет преподавателя, чтобы вести курс! \nСначала добавьте преподаватля в базу.");
+            }
+                break;
         case "4":
+            if (Students.Count > 0)
+            {
+                CourseStudentsAdd();
+            }
+            else if (Courses.Count > 0)
+            {
+                Console.WriteLine("В базе нет студентов, чтобы записать их на курс! \nСначала добавьте студентов в базу.");
+            }
+            else
+            {
+                Console.WriteLine("В базе нет курса, чтобы записать на него студентов! \nСначала добавьте курс в базу.");
+            }
             break;
         case "5":
             break;
@@ -38,6 +60,7 @@ while (input != "7")
     }
 
 }
+
 
 int IntInput()
 {
@@ -68,10 +91,17 @@ DateOnly DateInput()
     }
 }
 
+
 Person NewPerson()
 {
     Console.Write("Введите ФИО: ");
     string fio = Console.ReadLine();
+    while (fio == null)
+    {
+        Console.WriteLine("Введено неправильное ФИО!");
+        Console.Write("Введите ФИО: ");
+        fio = Console.ReadLine();
+    }
 
     Console.WriteLine("Выберите пол:\n" +
         "1 - Мужской\n" +
@@ -97,6 +127,7 @@ Person NewPerson()
 
     return new Person(fio, birth, gender);
 }
+
 
 void StudentAdd()
 {
@@ -127,6 +158,7 @@ void StudentAdd()
     Console.WriteLine("Студент успешно добавлен!\n");
 }
 
+
 void TeacherAdd()
 {
     Person person = NewPerson();
@@ -142,12 +174,107 @@ void TeacherAdd()
         exp = IntInput();
     }
 
-    Teacher newteacher = new Teacher(person.FIO, person.Birth, person.Gender, subject, exp);
+    Teacher newteacher = new Teacher(person.FIO, person.Birth, person.Gender, Teacher.GetID(), subject, exp);
     Teachers.Add(newteacher);
     Console.WriteLine("Преподаватель успешно добален!\n");
 
 }
 
+
+void CourseCreate()
+{
+    Console.Write("Введите название курса: ");
+    string name = Console.ReadLine();
+    while (name == null) 
+    {
+        Console.WriteLine("Неправильное название курса!");
+        name = Console.ReadLine();
+    }
+
+    Console.WriteLine("Выберите преподавателя курса:");
+    int count = 1;
+    foreach (Teacher teacher in Teachers)
+    {
+        Console.WriteLine($"{count}. {teacher.FIO}");
+        count++;
+    }
+    Console.Write("Ввод: ");
+    int teacherid = IntInput();
+    while (teacherid <= 0 || teacherid > Teachers.Count)
+    {
+        Console.WriteLine("Введён неправильный номер!");
+        Console.Write("Ввод: ");
+        teacherid = IntInput();
+    }
+    Teacher courseteacher = Teachers.ElementAt(teacherid - 1);
+
+    Course newcourse = new Course(Course.GetID(), name, new List<Student>(), courseteacher);
+    Courses.Add(newcourse);
+    Console.WriteLine("Курс успешно добавлен!\n");
+}
+
+void CourseStudentsAdd()
+{
+    Console.WriteLine("Выберите курс:");
+    int count_course = 1;
+    foreach (Course course in Courses)
+    {
+        Console.WriteLine($"{count_course}. {course.CourseName}");
+        count_course++;
+    }
+
+    Console.Write("Ввод: ");
+    int courseid = IntInput();
+    while (courseid <= 0 || courseid > Courses.Count)
+    {
+        Console.WriteLine("Введён неправильный номер!");
+        Console.Write("Ввод: ");
+        courseid = IntInput();
+    }
+
+    int studentid;
+    List<Student> students_not_in_course = new List<Student>();
+    do
+    {
+        int count_student = 1;
+        students_not_in_course.Clear();
+
+        Console.WriteLine("Выберите студента:");
+        foreach (Student student in Students)
+        {
+            if (Courses[courseid - 1].students.Contains(student) == false)
+            {
+                students_not_in_course.Add(student);
+                Console.WriteLine($"{count_student}. {student.FIO}");
+                count_student++;
+            }
+        }
+        if (students_not_in_course.Count > 0)
+        {
+            Console.WriteLine("Чтобы вернуться введите 0");
+            Console.Write("Ввод: ");
+            studentid = IntInput();
+            while (studentid < 0 || studentid > Students.Count)
+            {
+                Console.WriteLine("Введён неправильный номер студента!");
+                Console.Write("Ввод: ");
+                studentid = IntInput();
+            }
+        }
+        else
+        {
+            Console.WriteLine("В базе не осталось студентов вне этого курса!");
+            studentid = 0;
+        }
+        if (studentid != 0)
+        {
+            Courses[courseid - 1].CourseStudentAdd(students_not_in_course[studentid - 1]);
+            Console.WriteLine("Студент успешно добавлен!");
+        }
+    }
+    while (studentid != 0);
+
+}
 
 enum Gender
 {
@@ -174,6 +301,7 @@ class Person
             $"Дата рождения: {Birth}\n" +
             $"Пол: {Gender}");
     }
+
 
 }
 
@@ -205,12 +333,14 @@ class Student : Person
 
 class Teacher : Person
 {
+    private static int TeacherID = 1;
     private string Subject;
     private int ExperienceYears;
 
-    public Teacher(string fio, DateOnly birthday, Gender gender, string subject, int PCExperience)
+    public Teacher(string fio, DateOnly birthday, Gender gender, int teacherid, string subject, int PCExperience)
         : base(fio, birthday, gender)
     {
+        TeacherID = teacherid;
         Subject = subject;
         ExperienceYears = PCExperience;
     }
@@ -221,25 +351,29 @@ class Teacher : Person
         base.Print();
         Console.WriteLine($"Subject: {Subject}\nExperienceYears: {ExperienceYears}\n");
     }
+
+    public static int GetID()
+    {
+        return TeacherID;
+    }
+
 }
 
 class Course
 {
+    private static int CourseID = 1;
     public string CourseName { get; private set; }
     public List<Student> students {  get; private set; }
     public Teacher Teacher {  get; private set; }
 
-    public Course(string coursename, List<Student> students, Teacher teacher)
+    public Course(int courseid, string coursename, List<Student> students, Teacher teacher)
     {
+        CourseID = courseid;
         CourseName = coursename;
         this.students = students;
         Teacher = teacher;
     }
 
-    public void SetCourseName(string coursename)
-    {
-        CourseName = coursename;
-    }
 
     public void CourseStudentAdd(Student student)
     {
@@ -251,4 +385,9 @@ class Course
         Teacher = teacher;
     }
     
+    public static int GetID()
+    {
+        return CourseID;
+    }
+
 }
