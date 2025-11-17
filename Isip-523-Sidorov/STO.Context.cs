@@ -13,10 +13,10 @@ namespace Isip_523_Sidorov
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class STOEntities2 : DbContext
+    public partial class STOEntities4 : DbContext
     {
-        public STOEntities2()
-            : base("name=STOEntities2")
+        public STOEntities4()
+            : base("name=STOEntities4")
         {
         }
     
@@ -27,7 +27,6 @@ namespace Isip_523_Sidorov
     
         public virtual DbSet<Details> Details { get; set; }
         public virtual DbSet<Player> Player { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Wherehorse> Wherehorse { get; set; }
     }
 }

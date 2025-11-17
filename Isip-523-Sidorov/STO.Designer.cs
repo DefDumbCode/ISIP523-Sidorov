@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\dimas\source\repos\DefDumbCode\ISIP523-Sidorov\Isip-523-Sidorov\STO.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\234802\source\repos\DefDumbCode\ISIP523-Sidorov\Isip-523-Sidorov\STO.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

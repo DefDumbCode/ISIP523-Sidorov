@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b68ed3477a8a41ad9c8f4bef67272417" Name="Diagram1">
-        <EntityTypeShape EntityType="STO.Details" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="STO.Player" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="STO.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="STO.Wherehorse" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="STO.FK_Wherehorse_Details" ManuallyRouted="false" />
-        <AssociationConnector Association="STO.FK_Wherehorse_Player" ManuallyRouted="false" />
+      <Diagram DiagramId="7e0de45d6c9a427d95be74132a33235d" Name="Diagram1">
+        <EntityTypeShape EntityType="STOModel.Details" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STOModel.Player" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STOModel.Wherehorse" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="STOModel.FK_Wherehorse_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="STOModel.FK_Wherehorse_Player" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

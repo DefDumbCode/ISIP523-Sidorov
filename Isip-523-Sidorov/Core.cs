@@ -9,6 +9,6 @@ namespace Isip_523_Sidorov
 {
     internal class Core
     {
-        public static STOEntities2 Context = new STOEntities2();
+        public static STOEntities4 Context = new STOEntities4();
     }
 }

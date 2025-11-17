@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище STO" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище STOModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Details">
           <Key>
             <PropertyRef Name="DetailID" />
@@ -19,16 +19,6 @@
           </Key>
           <Property Name="PlayerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Balance" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Wherehorse">
           <Key>
@@ -63,10 +53,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище STOContainer">
+        <EntityContainer Name="Хранилище STOModelContainer">
           <EntitySet Name="Details" EntityType="Self.Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wherehorse" EntityType="Self.Wherehorse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Wherehorse_Details" Association="Self.FK_Wherehorse_Details">
             <End Role="Details" EntitySet="Details" />
@@ -81,7 +70,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="STO" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="STOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Details">
           <Key>
             <PropertyRef Name="DetailID" />
@@ -98,16 +87,6 @@
           <Property Name="PlayerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Balance" Type="Double" Nullable="false" />
           <NavigationProperty Name="Wherehorse" Relationship="Self.FK_Wherehorse_Player" FromRole="Player" ToRole="Wherehorse" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Wherehorse">
           <Key>
@@ -144,10 +123,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="STOEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="STOEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Details" EntityType="Self.Details" />
           <EntitySet Name="Player" EntityType="Self.Player" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Wherehorse" EntityType="Self.Wherehorse" />
           <AssociationSet Name="FK_Wherehorse_Details" Association="Self.FK_Wherehorse_Details">
             <End Role="Details" EntitySet="Details" />
@@ -163,9 +141,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище STOContainer" CdmEntityContainer="STOEntities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище STOModelContainer" CdmEntityContainer="STOEntities4">
           <EntitySetMapping Name="Details">
-            <EntityTypeMapping TypeName="STO.Details">
+            <EntityTypeMapping TypeName="STOModel.Details">
               <MappingFragment StoreEntitySet="Details">
                 <ScalarProperty Name="DetailID" ColumnName="DetailID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -174,26 +152,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Player">
-            <EntityTypeMapping TypeName="STO.Player">
+            <EntityTypeMapping TypeName="STOModel.Player">
               <MappingFragment StoreEntitySet="Player">
                 <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="STO.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Wherehorse">
-            <EntityTypeMapping TypeName="STO.Wherehorse">
+            <EntityTypeMapping TypeName="STOModel.Wherehorse">
               <MappingFragment StoreEntitySet="Wherehorse">
                 <ScalarProperty Name="DetailID" ColumnName="DetailID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />

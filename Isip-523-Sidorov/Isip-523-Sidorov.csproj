@@ -76,9 +76,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>STO.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>STO.tt</DependentUpon>
-    </Compile>
     <Compile Include="Wherehorse.cs">
       <DependentUpon>STO.tt</DependentUpon>
     </Compile>
