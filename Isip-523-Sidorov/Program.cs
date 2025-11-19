@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -13,8 +14,11 @@ namespace Isip_523_Sidorov
     {
         static void Main(string[] args)
         {
+            int countdown = 0;
             List<Details> details = Core.Context.Details.ToList();
-            Console.WriteLine("1. Начать игру\n" +
+            Dictionary<int, int> ordered_details = new Dictionary<int, int>();
+            Console.WriteLine("===МЕНЮ===\n" +
+                "1. Начать игру\n" +
                 "2. Выход");
             string input = Console.ReadLine();
             while (input != "1" && input != "2")
@@ -27,6 +31,7 @@ namespace Isip_523_Sidorov
             switch (input)
             {
                 case "1":
+                    Console.Clear();
                     Player player = new Player();
                     NewPlayer(out player);
                     Game(player);
@@ -62,6 +67,19 @@ namespace Isip_523_Sidorov
                     Car car = new Car();
                     car.NewCar(details);
                     List<Wherehorse> players_detail = new List<Wherehorse>();
+
+                    if (countdown == 2 && ordered_details != null)
+                    {
+                        Console.WriteLine("Вам пришли новые детали");
+                        foreach (var detail_id in ordered_details)
+                        {
+                            players_wharehouse.First(d => d.DetailID == detail_id.Key).Amount += detail_id.Value;
+                            Console.WriteLine($"Наименование {details.First(d => d.DetailID == detail_id.Key).DetailName} Количество: {players_wharehouse.First(d => d.DetailID == detail_id.Key).Amount}");
+                        }
+                        ordered_details.Clear();
+                        countdown = 0;
+                    }
+
                     Console.WriteLine("Сломанные детали");
                     foreach (var item in car.Broken_details)
                     {
@@ -90,18 +108,26 @@ namespace Isip_523_Sidorov
                                     foreach (var item in players_detail)
                                     {
                                         players_wharehouse.First(d => d.DetailID == item.DetailID).Amount--;
+                                        player.Balance += (details.First(d => d.DetailID == item.DetailID).Price * 1.2);
+                                        Console.Clear();
                                     }
                                 }
                                 else
                                 {
+                                    Console.Clear();
                                     Console.WriteLine("У Вас не оказалось нужной детали!\n" +
                                         "Клиет недоволен! (-250 зол.)");
+                                    player.Balance -= 250;
                                 }
                                 client_served = true;
+                                countdown += 1;
                                 break;
                             case "2":
+                                Console.Clear();
                                 Console.WriteLine("Клиент недоволен! (-200 зол.)");
+                                player.Balance -= 200;
                                 client_served = true;
+                                countdown += 1;
                                 break;
                             case "3":
                                 BuyDetails(players_wharehouse, player);
@@ -109,7 +135,9 @@ namespace Isip_523_Sidorov
                                 action = WhatToDo();
                                 break;
                             default:
-                                //BuyDetails();
+                                BuyDetails(players_wharehouse, player);
+                                ShowClient(car, players_detail);
+                                action = WhatToDo();
                                 break;
                         }
                     }
@@ -121,7 +149,7 @@ namespace Isip_523_Sidorov
             {
                 player = new Player
                 {
-                    Balance = 1000,
+                    Balance = 2000,
                 };
                 Core.Context.Player.Add(player);
                 
@@ -169,7 +197,8 @@ namespace Isip_523_Sidorov
                 if (details.First(d => d.DetailID == shop).Price * buy <= player.Balance)
                 {
                     player.Balance -= details.First(d => d.DetailID == shop).Price * buy;
-                    players_wharehouse.First(d => d.DetailID == shop).Amount += buy;
+                    ordered_details.Add(shop, buy);
+                    countdown = 0;
                     Core.Context.SaveChanges();
                 }
                 else
@@ -181,6 +210,7 @@ namespace Isip_523_Sidorov
 
             void ShowClient(Car car, List<Wherehorse> players_detail)
             {
+                Console.WriteLine("===МАСТЕРСКАЯ===");
                 Console.WriteLine("Сломанные детали");
                 foreach (var item in car.Broken_details)
                 {

@@ -20,7 +20,11 @@ namespace Isip_523_Sidorov
             Random rand = new Random();
             for (int i = 0; i < rand.Next(1, details.Count); i++)
             {
-                Broken_details.Add(details[rand.Next(0, details.Count)]);
+                int random_num = rand.Next(0, details.Count);
+                if (Broken_details.Contains(details[random_num]) == false)
+                {
+                    Broken_details.Add(details[random_num]);
+                }
             }
         }
     }
