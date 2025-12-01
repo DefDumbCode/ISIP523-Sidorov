@@ -22,5 +22,6 @@ namespace Sidorov_Isip523
     
         public virtual Clients Clients { get; set; }
         public virtual Products Products { get; set; }
+
     }
 }

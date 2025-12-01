@@ -166,6 +166,16 @@ namespace Sidorov_Isip523
                 }
             }
 
+            void CartShow()
+            {
+                Console.WriteLine("===Корзина===");
+                foreach (var cart in carts)
+                {
+                    Console.WriteLine($"{products.FirstOrDefault(p => p.ID == cart.ProductID).Name}.\n" +
+                        $"Количество: {cart.Amount}\n");
+                }
+            }
+
             int IntInput()
             {
                 if (int.TryParse(Console.ReadLine(), out int output))
