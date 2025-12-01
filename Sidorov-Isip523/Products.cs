@@ -29,5 +29,10 @@ namespace Sidorov_Isip523
         public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordering_Prod> Ordering_Prod { get; set; }
+
+        public void ProductShow()
+        {
+            Console.WriteLine($"{ID}. {Name}: {Price}.");
+        }
     }
 }

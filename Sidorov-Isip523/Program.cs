@@ -13,13 +13,15 @@ namespace Sidorov_Isip523
         {
             List<Products> products = Core.Context.Products.ToList();
             List<Clients> clients = Core.Context.Clients.ToList();
-            Clients client = new Clients();
+            List<Cart> carts = new List<Cart>();
+            Clients client = null;
 
             string choice = " ";
             while (choice != "5")
             {
                 Console.Clear();
                 Menu();
+                Console.Write("Выбор: ");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -37,7 +39,7 @@ namespace Sidorov_Isip523
                         client = NewLogin();
                         break;
                     case "3":
-                        //Catalog();
+                        Catalog(client);
                         break;
                     case "4":
                         //CartShow();
@@ -48,7 +50,7 @@ namespace Sidorov_Isip523
                         Console.WriteLine("Неправильный выбор!");
                         break;
                 }
-                
+
             }
 
 
@@ -78,9 +80,9 @@ namespace Sidorov_Isip523
                 string password1 = Console.ReadLine();
                 Console.Write("Повторите пароль: ");
                 string password2 = Console.ReadLine();
-                if(password1 == password2)
+                if (password1 == password2)
                 {
-                    Clients user = new Clients{ Login = login, Password = password1};
+                    Clients user = new Clients { Login = login, Password = password1 };
                     Core.Context.Clients.Add(user);
                     clients.Add(user);
                     Core.Context.SaveChanges();
@@ -90,6 +92,77 @@ namespace Sidorov_Isip523
                 {
                     Console.WriteLine("Пароли не совпадают");
                     return NewLogin();
+                }
+            }
+
+            void Catalog(Clients user)
+            {
+                Console.WriteLine("===Каталог товаров===");
+                foreach (var item in products)
+                {
+                    item.ProductShow();
+                }
+
+                if (user == null)
+                {
+                    Console.Write("Вы не вошли в аккаунт. Добавление товаров в корзину недоступно.\n" +
+                        "Нажмите Enter для возвращения в меню ");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.Write("Покупаете или просто посмотреть?\n" +
+                        "1) М..мнем..мнем..Покупаю!\n" +
+                        "2) Нет, я просто смотрю.\n" +
+                        "Выбор: ");
+                    int look = IntInput();
+                    while (look != 1 && look != 2)
+                    {
+                        Console.Write("Непрвильный выбор!\n" +
+                            "Попробуйте ещё раз: ");
+                        look = IntInput();
+                    }
+
+                    if (look == 1)
+                    {
+                        int keep_buy = 1;
+                        while (keep_buy != 2)
+                        {
+                            Console.Write("Введите точное название товара, который хотите заказать: ");
+                            string ProdName = Console.ReadLine();
+                            var prod = products.FirstOrDefault(p => p.Name == ProdName);
+                            while (prod == null)
+                            {
+                                Console.Write("Товар не найден, попробуйте снова: ");
+                                ProdName = Console.ReadLine();
+                                prod = products.FirstOrDefault(p => p.Name == ProdName);
+                            }
+                            Console.Write("Введите количество: ");
+                            int amount = IntInput();
+                            while (amount < 0)
+                            {
+                                Console.Write("Указано неправильное количество!\n" +
+                                    "Попробуйте еще раз: ");
+                                amount = IntInput();
+                            }
+
+                            Cart cart = new Cart { UserID = client.ID, Amount = amount, ProductID = prod.ID };
+                            Core.Context.Cart.Add(cart);
+                            carts.Add(cart);
+                            Core.Context.SaveChanges();
+                            Console.Write("Товар добавлен в корзину.\n" +
+                                "1) Продолжить покупки.\n" +
+                                "2) Завершить.\n" +
+                                "Выбор: ");
+                            keep_buy = IntInput();
+                            while (keep_buy != 1 && keep_buy != 2)
+                            {
+                                Console.Write("Неправильный выбор!\n" +
+                                    "Попробуйте снова: ");
+                                keep_buy = IntInput();
+                            }
+                        }
+                    }
                 }
             }
 
