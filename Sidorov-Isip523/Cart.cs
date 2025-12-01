@@ -11,7 +11,8 @@ namespace Sidorov_Isip523
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Cart
     {
         public int ID { get; set; }
