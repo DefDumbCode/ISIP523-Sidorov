@@ -14,6 +14,8 @@ namespace Sidorov_Isip523
             List<Products> products = Core.Context.Products.ToList();
             List<Clients> clients = Core.Context.Clients.ToList();
             List<Cart> carts = new List<Cart>();
+            List<Order> orders = new List<Order>();
+            List<PVZ> PVZs = Core.Context.PVZ.ToList();
             Clients client = null;
 
             string choice = " ";
@@ -42,7 +44,7 @@ namespace Sidorov_Isip523
                         Catalog(client);
                         break;
                     case "4":
-                        //CartShow();
+                        CartShow(client);
                         break;
                     case "5":
                         break;
@@ -166,13 +168,41 @@ namespace Sidorov_Isip523
                 }
             }
 
-            void CartShow()
+            void CartShow(Clients user)
             {
                 Console.WriteLine("===Корзина===");
+                carts = Core.Context.Cart.ToList().Where(c => c.UserID == user.ID).ToList();
                 foreach (var cart in carts)
                 {
                     Console.WriteLine($"{products.FirstOrDefault(p => p.ID == cart.ProductID).Name}.\n" +
                         $"Количество: {cart.Amount}\n");
+                }
+
+                Console.Write("Действия:\n" +
+                    "1) Купить все.\n" +
+                    "2) Купить один товар.\n" +
+                    "3) Вернуться в меню.\n" +
+                    "Выбор: ");
+                int cart_choice = IntInput();
+                switch (cart_choice)
+                {
+                    case 1:
+                        Console.WriteLine("Выберите ПВЗ:");
+                        foreach(var pvz in PVZs)
+                        {
+
+                        }
+                        foreach (var cart in carts)
+                        {
+                            //Order order = new Order { ClientID=client.ID, CartID = cart.ID, };
+                        }
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
                 }
             }
 
