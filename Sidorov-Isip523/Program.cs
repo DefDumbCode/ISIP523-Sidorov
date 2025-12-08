@@ -16,10 +16,11 @@ namespace Sidorov_Isip523
             List<Cart> carts = new List<Cart>();
             List<Order> orders = new List<Order>();
             List<PVZ> PVZs = Core.Context.PVZ.ToList();
+            List<Ordering_Prod> ordering_Prods = Core.Context.Ordering_Prod.ToList();
             Clients client = null;
 
             string choice = " ";
-            while (choice != "5")
+            while (choice != "6")
             {
                 Console.Clear();
                 Menu();
@@ -44,9 +45,31 @@ namespace Sidorov_Isip523
                         Catalog(client);
                         break;
                     case "4":
-                        CartShow(client);
+                        if (client == null)
+                        {
+                            Console.Write("Вы не вошли в аккаунт. Добавление товаров в корзину недоступно.\n" +
+                            "Нажмите Enter для возвращения в меню ");
+                            Console.ReadLine();
+                        }
+                        else 
+                        {
+                            CartShow(client);
+                        }
                         break;
                     case "5":
+                        if (client == null)
+                        {
+                            Console.Write("Вы не вошли в аккаунт.\n" +
+                            "Нажмите Enter для возвращения в меню ");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            OrdersShow();
+                        }
+                        
+                        break;
+                    case "6":
                         break;
                     default:
                         Console.WriteLine("Неправильный выбор!");
@@ -165,6 +188,11 @@ namespace Sidorov_Isip523
                             }
                         }
                     }
+                    else
+                    {
+                        Console.Write("Нажмите Enter для возвращения в меню ");
+                        Console.ReadLine();
+                    }
                 }
             }
 
@@ -184,26 +212,103 @@ namespace Sidorov_Isip523
                     "3) Вернуться в меню.\n" +
                     "Выбор: ");
                 int cart_choice = IntInput();
+                int pvzid;
                 switch (cart_choice)
                 {
                     case 1:
                         Console.WriteLine("Выберите ПВЗ:");
                         foreach(var pvz in PVZs)
                         {
-
+                            Console.WriteLine($"{pvz.ID}) {pvz.Adress}.");
                         }
+                        pvzid = IntInput();
+                        
+                        while (PVZs.FirstOrDefault(pvz => pvz.ID == pvzid) == null)
+                        {
+                            Console.Write("Неправильный выбор!\n" +
+                                    "Попробуйте снова: ");
+                            pvzid = IntInput();
+                        }
+
+
                         foreach (var cart in carts)
                         {
-                            //Order order = new Order { ClientID=client.ID, CartID = cart.ID, };
+                            Order ordered = new Order { ClientID=client.ID, CartID = cart.ID, PvzID = pvzid, Date = DateTime.Now };
+                            Core.Context.Order.Add(ordered);
+                            Core.Context.SaveChanges();
+                            Ordering_Prod ordering_Proded = new Ordering_Prod { ProductsID = carts.FirstOrDefault(c => c.ID == cart.ID).ProductID, Amount = carts.FirstOrDefault(c => c.ID == cart.ID).Amount, OrderID = ordered.ID };
+                      
+                            
+                            Core.Context.Ordering_Prod.Add(ordering_Proded);
+                            ordering_Prods.Add(ordering_Proded);
+                            Core.Context.Cart.Remove(carts.FirstOrDefault(c => c.ID == cart.ID));
+                            orders.Add(ordered);
                         }
+                        
+                        carts.Clear();
+                        Core.Context.SaveChanges();
+
+                        Console.WriteLine("Заказ оформлен.");
+                        Console.Write("Нажмите Enter для возвращения в меню ");
+                        Console.ReadLine();
+
                         break;
                     case 2:
+                        Console.Write("Введите точное название товара, который хотите заказать: ");
+                        string ProdName = Console.ReadLine();
+                        while (products.FirstOrDefault(p => p.Name == ProdName) == null)
+                        {
+                            Console.Write("Товар не найден, попробуйте снова: ");
+                            ProdName = Console.ReadLine();
+                        }
+                        var cartid = carts.FirstOrDefault(cart => products.FirstOrDefault(p => p.Name == ProdName).ID == cart.ProductID).ID;
+
+
+                        Console.WriteLine("Выберите ПВЗ:");
+                        foreach (var pvz in PVZs)
+                        {
+                            Console.WriteLine($"{pvz.ID}) {pvz.Adress}.");
+                        }
+                        pvzid = IntInput();
+
+                        while (PVZs.FirstOrDefault(pvz => pvz.ID == pvzid) == null)
+                        {
+                            Console.Write("Неправильный выбор!\n" +
+                                    "Попробуйте снова: ");
+                            pvzid = IntInput();
+                        }
+
+                        Order order = new Order { ClientID = client.ID, CartID = cartid, PvzID = pvzid, Date = DateTime.Now};
+                        Core.Context.Order.Add(order);
+                        orders.Add(order);
+                        Core.Context.Cart.Remove(carts.FirstOrDefault(c => c.ID == cartid));
+                        Core.Context.SaveChanges();
+                        Ordering_Prod ordering_Prod = new Ordering_Prod { ProductsID = carts.FirstOrDefault(c => c.ID == cartid).ProductID, Amount = carts.FirstOrDefault(c => c.ID == cartid).Amount, OrderID = order.ID };
+                        Core.Context.Ordering_Prod.Add(ordering_Prod);
+                        ordering_Prods.Add(ordering_Prod);
+                        Core.Context.SaveChanges();
+                        Console.WriteLine("Заказ оформлен.");
+                        Console.Write("Нажмите Enter для возвращения в меню ");
+                        Console.ReadLine();
+
                         break;
                     case 3:
                         break;
                     default:
                         break;
                 }
+            }
+
+            void OrdersShow()
+            {
+                foreach(var order in orders)
+                {
+                    Console.WriteLine($"Продукт: {products.FirstOrDefault(p => p.ID == ordering_Prods.FirstOrDefault(op => op.OrderID == order.ID).ProductsID).Name}\n" +
+                        $"Адрес: {PVZs.FirstOrDefault(p => p.ID == order.PvzID).Adress}" +
+                        $"Время: {order.Date}");
+                }
+                Console.Write("Нажмите Enter для возвращения в меню ");
+                Console.ReadLine();
             }
 
             int IntInput()
@@ -228,7 +333,8 @@ namespace Sidorov_Isip523
                     "2) Зарегистрироваться\n" +
                     "3) Каталог товаров.\n" +
                     "4) Корзина.\n" +
-                    "5) Выйти.");
+                    "5) Просмотр заказов\n" +
+                    "6) Выйти.");
             }
         }
     }
