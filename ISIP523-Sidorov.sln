@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISIP523-Sidorov", "ISIP523-Sidorov\ISIP523-Sidorov.csproj", "{5096BBA6-35EF-409E-ABD3-83C67A0D748F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidorov-Isip523", "Sidorov-Isip523\Sidorov-Isip523.csproj", "{AA813A00-F494-47D0-9BD8-CBF725CCE071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5096BBA6-35EF-409E-ABD3-83C67A0D748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5096BBA6-35EF-409E-ABD3-83C67A0D748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5096BBA6-35EF-409E-ABD3-83C67A0D748F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA813A00-F494-47D0-9BD8-CBF725CCE071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA813A00-F494-47D0-9BD8-CBF725CCE071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA813A00-F494-47D0-9BD8-CBF725CCE071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA813A00-F494-47D0-9BD8-CBF725CCE071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
