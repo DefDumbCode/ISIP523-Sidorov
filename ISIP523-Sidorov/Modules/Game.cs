@@ -21,7 +21,8 @@ namespace ISIP523_Sidorov.Modules
         {
             Goblin = 1,
             Sekleton,
-            Mage
+            Mage,
+            Slime
         }
 
         Random random = new Random();

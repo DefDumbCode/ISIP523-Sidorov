@@ -13,7 +13,7 @@ namespace ISIP523_Sidorov.Modules.Factory
         public static Enemy RandomEnemy()
         {
             Random random = new Random();
-            switch (random.Next(1, 4))
+            switch (random.Next(1, 5))
             {
                 case 1:
                     return new Goblin();
@@ -24,7 +24,9 @@ namespace ISIP523_Sidorov.Modules.Factory
                 case 3:
                     return new Mage();
                     break;
-                default: return new Sekleton();
+                 case 4:
+                    return new Slime();
+                default: return new Slime();
             }
         }
 
