@@ -3,25 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-
-namespace Pooomnite.Pages
+namespace Pooomnite.Models
 {
-    /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
-    /// </summary>
-    /// 
-
-    
+    public class Pizza
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Price { get; set; }
+        public string Size { get; set; }
+    }
 
     public partial class MainPage : Page
     {
@@ -61,24 +53,6 @@ namespace Pooomnite.Pages
                 Description = "Видимо, у тебя нет друзей",
                 Price = 400
             }
-        };  
-        public MainPage()
-        {
-            InitializeComponent();
-
-            PizzasListBox.ItemsSource = PizzasList;
-        }
-
-        private void PizzasListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            NextBtn.IsEnabled = true;
-        }
-
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var pizza = PizzasListBox.SelectedItem as Pizza;
-            NavigationService.Navigate(new OptionsPage());
-        }
+        };
     }
-
 }

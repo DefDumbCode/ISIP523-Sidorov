@@ -1,0 +1,33 @@
+﻿<Page x:Class="Pooomnite.Pages.OptionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pooomnite.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="400"
+      Title="OptionsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+            <TextBlock Text="Размер:" FontSize="20"/>
+            <RadioButton x:Name="SmallPizzaRadioButton" Content="Маленькая" FontSize="20" Checked="SmallPizzaRadioButton_Checked"/>
+            <RadioButton x:Name="MediumPizzaRadioButton" Content="Средняя" FontSize="20" Checked="MediumPizzaRadioButton_Checked"/>
+            <RadioButton x:Name="BigPizzaRadioButton" Content="Большая" FontSize="20" Checked="BigPizzaRadioButton_Checked"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Доп. ингридиенты:" Grid.Column="1"  Margin="10" FontSize="20"/>
+            <Button x:Name="AddIngridient" Content="Добавить ингридиент" Height="30" Width="150" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" />
+        </StackPanel>
+        <Button x:Name="BackBtn" Content="Назад" Height="50" Width="100" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10"/>
+        <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10"/>
+    </Grid>
+</Page>
