@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pooomnite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,27 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pooomnite
+namespace Pooomnite.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ConfirmPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConfirmPage : Page
     {
-        public MainWindow()
+        public ConfirmPage(Pizza pizza)
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.MainPage());
-        }
-
-        private void BackBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

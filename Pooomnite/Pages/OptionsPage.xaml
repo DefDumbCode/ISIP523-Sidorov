@@ -24,10 +24,21 @@
             <RadioButton x:Name="BigPizzaRadioButton" Content="Большая" FontSize="20" Checked="BigPizzaRadioButton_Checked"/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Доп. ингридиенты:" Grid.Column="1"  Margin="10" FontSize="20"/>
-            <Button x:Name="AddIngridient" Content="Добавить ингридиент" Height="30" Width="150" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" />
+            <ComboBox x:Name="SelectInredient" Height="45" Width="160" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" SelectionChanged="SelectInredient_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding IngredientName, StringFormat=Название: {0}}"/>
+                            <TextBlock Text="{Binding IngredientPrice, StringFormat=Цена: {0}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button x:Name="AddIngredient" Content="Добавить ингредиент" Height="30" Width="150" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Click="AddIngredient_Click" />
+            <TextBlock Text="Доп. ингредиенты:\n" Grid.Column="1"  Margin="10 10 10 1" FontSize="20"/>
+            <TextBlock x:Name="PizzasIngred" Text="" Grid.Column="1"  Margin="10 1" FontSize="16"/>
         </StackPanel>
-        <Button x:Name="BackBtn" Content="Назад" Height="50" Width="100" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10"/>
-        <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10"/>
+        <Button x:Name="BackBtn" Content="Назад" Height="50" Width="100" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10" Click="BackBtn_Click"/>
+        <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10" IsEnabled="False"/>
     </Grid>
 </Page>

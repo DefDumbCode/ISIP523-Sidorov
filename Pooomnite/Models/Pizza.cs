@@ -13,45 +13,51 @@ namespace Pooomnite.Models
         public string Description { get; set; }
         public int Price { get; set; }
         public string Size { get; set; }
+        public List<Ingredient> PizzaIngredients { get; set; }
     }
 
-    public partial class MainPage : Page
+    public partial class PizzaData
     {
-        public List<Pizza> PizzasList = new List<Pizza>
+        public static List<Pizza> PizzasList = new List<Pizza>
         {
             new Pizza
             {
                 Name = "Маргарита",
                 Description = "Крутая пицца Маргарита",
-                Price = 400
+                Price = 400,
+                PizzaIngredients = new List<Ingredient>()
             },
 
             new Pizza
             {
                 Name = "4 Сыра",
                 Description = "Иди на все 4 стороны с этой пиццой",
-                Price = 450
+                Price = 450,
+                PizzaIngredients = new List<Ingredient>()
             },
 
             new Pizza
             {
                 Name = "Охотничья",
                 Description = "Нет, она не сделает тебя охотником",
-                Price = 500
+                Price = 500,
+                PizzaIngredients = new List<Ingredient>()
             },
 
             new Pizza
             {
                 Name = "Пирог",
                 Description = "Господь не будет так милостив с тобой...",
-                Price = 400
+                Price = 400,
+                PizzaIngredients = new List<Ingredient>()
             },
 
             new Pizza
             {
                 Name = "Гавайская",
                 Description = "Видимо, у тебя нет друзей",
-                Price = 400
+                Price = 400,
+                PizzaIngredients = new List<Ingredient>()
             }
         };
     }
