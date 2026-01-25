@@ -12,7 +12,7 @@ namespace Pooomnite.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-        public string Size { get; set; }
+        public string  Size { get; set; }
         public List<Ingredient> PizzaIngredients { get; set; }
     }
 
@@ -33,7 +33,7 @@ namespace Pooomnite.Models
                 Name = "4 Сыра",
                 Description = "Иди на все 4 стороны с этой пиццой",
                 Price = 450,
-                PizzaIngredients = new List<Ingredient>()
+                PizzaIngredients = new List<Ingredient>(),
             },
 
             new Pizza
@@ -41,7 +41,7 @@ namespace Pooomnite.Models
                 Name = "Охотничья",
                 Description = "Нет, она не сделает тебя охотником",
                 Price = 500,
-                PizzaIngredients = new List<Ingredient>()
+                PizzaIngredients = new List<Ingredient>(),
             },
 
             new Pizza
@@ -49,7 +49,7 @@ namespace Pooomnite.Models
                 Name = "Пирог",
                 Description = "Господь не будет так милостив с тобой...",
                 Price = 400,
-                PizzaIngredients = new List<Ingredient>()
+                PizzaIngredients = new List<Ingredient>(),
             },
 
             new Pizza
@@ -57,7 +57,7 @@ namespace Pooomnite.Models
                 Name = "Гавайская",
                 Description = "Видимо, у тебя нет друзей",
                 Price = 400,
-                PizzaIngredients = new List<Ingredient>()
+                PizzaIngredients = new List<Ingredient>(),
             }
         };
     }

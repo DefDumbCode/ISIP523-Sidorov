@@ -39,6 +39,6 @@
             <TextBlock x:Name="PizzasIngred" Text="" Grid.Column="1"  Margin="10 1" FontSize="16"/>
         </StackPanel>
         <Button x:Name="BackBtn" Content="Назад" Height="50" Width="100" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10" Click="BackBtn_Click"/>
-        <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10" IsEnabled="False"/>
+        <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10" IsEnabled="False" Click="NextBtn_Click"/>
     </Grid>
 </Page>
