@@ -31,7 +31,7 @@ namespace Sidorov_ISIP_523.Pages
             List<Products> ProdsInCart = new List<Products>();
             foreach (var product in cart) 
             {
-                ProdsInCart.Add(ProductsData.ProductsList.ToList().FirstOrDefault(p => p.ProductID == product.ProductID));
+                //ProdsInCart.Add(ProductsData.ProductsList.ToList().FirstOrDefault(p => p.ProductID == product.ProductID));
             }
             ProductsLB.ItemsSource = ProdsInCart;
 
