@@ -13,17 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Sidorov_ISIP_523
+namespace Sidorov_ISIP_523.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ConfirmPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConfirmPage : Page
     {
-        public MainWindow()
+        Orders order;
+        List<Cart> cart;
+
+        public ConfirmPage( Orders _order, List<Cart> _cart)
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.MainPage());
+            order = _order;
+            cart = _cart;
         }
     }
 }

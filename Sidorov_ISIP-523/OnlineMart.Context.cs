@@ -13,10 +13,10 @@ namespace Sidorov_ISIP_523
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineMartEntities : DbContext
+    public partial class OnlineMartEntities2 : DbContext
     {
-        public OnlineMartEntities()
-            : base("name=OnlineMartEntities")
+        public OnlineMartEntities2()
+            : base("name=OnlineMartEntities2")
         {
         }
     

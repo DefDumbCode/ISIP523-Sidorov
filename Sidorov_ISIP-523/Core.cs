@@ -8,6 +8,6 @@ namespace Sidorov_ISIP_523
 {
     internal class Core
     {
-        public static OnlineMartEntities Context = new OnlineMartEntities();
+        public static OnlineMartEntities2 Context = new OnlineMartEntities2();
     }
 }

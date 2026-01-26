@@ -1,0 +1,33 @@
+﻿<Page x:Class="Sidorov_ISIP_523.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sidorov_ISIP_523.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="ProductsLB"  SelectionChanged="ProductsLB_SelectionChanged" Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding ImagePath}" Width="200" Height="150"/>
+                        <TextBlock Text="{Binding ProductName, StringFormat=Название: {0}}"/>
+                        <TextBlock Text="{Binding Price, StringFormat=Цена: {0}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal"  Grid.Row="1" HorizontalAlignment="Right">
+            <Button x:Name="AddToCartBtn" Content="Добавить в корзину" Height="50" Width="100" Grid.Row="1" HorizontalAlignment="Right" Margin="10" Click="AddToCartBtn_Click"/>
+            <Button x:Name="NextBtn" Content="Далее" Height="50" Width="100" Margin="10" IsEnabled="False" Click="NextBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

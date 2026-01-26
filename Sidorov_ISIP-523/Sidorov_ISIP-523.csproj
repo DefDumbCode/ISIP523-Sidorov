@@ -67,13 +67,32 @@
       <DependentUpon>OnlineMart.tt</DependentUpon>
     </Compile>
     <Compile Include="Core.cs" />
+    <Compile Include="OnlineMart.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineMart.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="OnlineMart.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OnlineMart.tt</DependentUpon>
     </Compile>
+    <Compile Include="OnlineMart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineMart.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Orders.cs">
       <DependentUpon>OnlineMart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CartPage.xaml.cs">
+      <DependentUpon>CartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ConfirmPage.xaml.cs">
+      <DependentUpon>ConfirmPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
       <DependentUpon>OnlineMart.tt</DependentUpon>
@@ -93,18 +112,20 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\CartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ConfirmPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OnlineMart.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMart.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OnlineMart.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMart.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,19 +160,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Sekleton.jpg" />
+    <Resource Include="Images\Shrimp.jpg" />
+    <Resource Include="Images\Egg.jpg" />
+    <Resource Include="Images\Monke.jpg" />
+    <Resource Include="Images\Pear.jpg" />
+    <Resource Include="Images\PerryBass.jpg" />
+    <Resource Include="Images\Phish.jpg" />
     <Content Include="OnlineMart.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OnlineMart.Context.cs</LastGenOutput>
       <DependentUpon>OnlineMart.edmx</DependentUpon>
+      <LastGenOutput>OnlineMart.Context.cs</LastGenOutput>
     </Content>
     <Content Include="OnlineMart.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OnlineMart.edmx</DependentUpon>
       <LastGenOutput>OnlineMart.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

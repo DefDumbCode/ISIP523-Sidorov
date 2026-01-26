@@ -11,7 +11,8 @@ namespace Sidorov_ISIP_523
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,11 @@ namespace Sidorov_ISIP_523
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public double Price { get; set; }
+        public string ImagePath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }
     }
+
+
 }
