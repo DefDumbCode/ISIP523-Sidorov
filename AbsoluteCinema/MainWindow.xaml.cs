@@ -23,6 +23,7 @@ namespace AbsoluteCinema
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.NavigationService.Navigate(new Pages.MainPage());
         }
     }
 }

@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cinema.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core.cs" />
     <Compile Include="Films.cs">
       <DependentUpon>Cinema.tt</DependentUpon>
     </Compile>
@@ -182,6 +183,11 @@
       <DependentUpon>Cinema.edmx</DependentUpon>
       <LastGenOutput>Cinema.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\Елки12.jpg" />
+    <Resource Include="Images\Pulp Fiction.jpg" />
+    <Resource Include="Images\Menu.jpg" />
+    <Resource Include="Images\Full Metal Jacket.jpg" />
+    <Resource Include="Images\Doctor Starngelove.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

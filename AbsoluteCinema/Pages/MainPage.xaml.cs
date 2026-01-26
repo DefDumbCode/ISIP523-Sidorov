@@ -20,9 +20,21 @@ namespace AbsoluteCinema.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        public static List<Films> FilmsList = Core.Context.Films.ToList();
         public MainPage()
         {
             InitializeComponent();
+            FilmsLB.ItemsSource = FilmsList;
+        }
+
+        private void FilmsLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SearchTB_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
