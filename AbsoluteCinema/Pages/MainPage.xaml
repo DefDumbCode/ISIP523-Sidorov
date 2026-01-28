@@ -19,20 +19,20 @@
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
-            <TextBox x:Name="SearchTB"
-         Height="30" Width="200" FontSize="18" DataContextChanged="SearchTB_DataContextChanged"/>
-            <Button x:Name="SearchBtn" Height="30" Width="30"/>
-        </StackPanel>
+        <ComboBox x:Name="SortByCB" VerticalContentAlignment="Center"
+                  Height="35" Width="125" Margin="5" SelectionChanged="SortByCB_SelectionChanged"/>
 
-        <Button x:Name="LogInBtn" Grid.Row="0" Grid.Column="2" Height="55" Width="150"/>
+         <TextBox x:Name="SearchTB" Grid.Column="1" VerticalContentAlignment="Center"
+         Height="30" Width="200" FontSize="18" TextChanged="SearchTB_TextChanged"/>
+
+        <Button x:Name="LogInBtn" Grid.Row="0" Grid.Column="2" Height="55" Width="150" Margin="5"/>
 
         <ListBox x:Name="FilmsLB" SelectionChanged="FilmsLB_SelectionChanged"
                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Width="150">
+                    <StackPanel Width="200">
                         <Image Source="{Binding ImagePath}" Width="150" Height="250"/>
                         <TextBlock Text="{Binding FilmName}" FontSize="16" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding FilmRate, StringFormat=Рейтинг: {0}}" FontSize="14"/>

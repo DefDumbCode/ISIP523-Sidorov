@@ -21,20 +21,45 @@ namespace AbsoluteCinema.Pages
     public partial class MainPage : Page
     {
         public static List<Films> FilmsList = Core.Context.Films.ToList();
+        public static List<string> Sorting = new List<string> { "НАЗВАНИЮ", "РЕЙТИНГУ" };
         public MainPage()
         {
             InitializeComponent();
             FilmsLB.ItemsSource = FilmsList;
+            SortByCB.ItemsSource = Sorting;
+            SortByCB.SelectedIndex = 0;
         }
 
         private void FilmsLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
-        private void SearchTB_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            FilmsLB.ItemsSource = FilmsList.Where(f => f.FilmName.ToLower().Contains(SearchTB.Text.ToLower()));
+        }
 
+        private void SortByCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (SortByCB.SelectedItem as string)
+            {
+                case "НАЗВАНИЮ":
+                    FilmsLB.ItemsSource = FilmsList.OrderBy(f => f.FilmName);
+                    break;
+                case "РЕЙТИНГУ":
+                    FilmsLB.ItemsSource = FilmsList.OrderByDescending(f => f.FilmRate);
+                    break;
+                default:
+                    FilmsLB.ItemsSource = FilmsList.OrderBy(f => f.FilmName);
+                    break;
+            }
+            
+        }
+
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilmsLB.ItemsSource = FilmsList.Where(f => f.FilmName.ToLower().Contains(SearchTB.Text.ToLower()));
         }
     }
 }
