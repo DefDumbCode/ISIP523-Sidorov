@@ -25,7 +25,7 @@
          <TextBox x:Name="SearchTB" Grid.Column="1" VerticalContentAlignment="Center"
          Height="30" Width="200" FontSize="18" TextChanged="SearchTB_TextChanged"/>
 
-        <Button x:Name="LogInBtn" Grid.Row="0" Grid.Column="2" Height="55" Width="150" Margin="5"/>
+        <Button x:Name="LogInBtn" Click="LogInBtn_Click" Grid.Row="0" Grid.Column="2" Height="55" Width="150" Margin="5"/>
 
         <ListBox x:Name="FilmsLB" SelectionChanged="FilmsLB_SelectionChanged"
                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"

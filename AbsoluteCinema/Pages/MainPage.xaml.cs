@@ -61,5 +61,10 @@ namespace AbsoluteCinema.Pages
         {
             FilmsLB.ItemsSource = FilmsList.Where(f => f.FilmName.ToLower().Contains(SearchTB.Text.ToLower()));
         }
+
+        private void LogInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
+        }
     }
 }
