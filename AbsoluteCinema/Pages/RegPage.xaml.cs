@@ -27,7 +27,41 @@ namespace AbsoluteCinema.Pages
 
         private void RegBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(PasswordTB.Text == PasswordRepTB.Text)
+            {
+                if(PasswordTB.Text.Length >= 8)
+                {
+                    MainWindow.User = new Accounts { AccountLogin = LoginTB.Text, AccountPassword = PasswordTB.Text };
+                    Core.Context.Accounts.Add(MainWindow.User);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Регистрация прошла успешно");
+                    if (NavigationService.CanGoBack)
+                    {
+                        NavigationService.Navigate(new MainPage());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пароль должен иметь длину не менее 8 символов");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пароли не совпадают");
+            }
+        }
 
+        private void LoginTB_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        private void PasswordTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(LoginTB.Text) && !String.IsNullOrEmpty(PasswordTB.Text)
+                && !String.IsNullOrEmpty(PasswordRepTB.Text))
+            {
+                RegBtn.IsEnabled = true;
+            }
         }
     }
 }

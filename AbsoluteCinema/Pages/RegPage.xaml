@@ -15,12 +15,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Width="250">
             <TextBlock Text="Регистрация" FontSize="36" HorizontalAlignment="Center" Margin="10"/>
+            
             <TextBlock Text="Придумайте логин" FontSize="20" HorizontalAlignment="Left" Margin="10 0 0 0"/>
-            <TextBox x:Name="FioTB" Width="220" Height="28" Margin="5"/>
+            <TextBox x:Name="LoginTB" Width="220" TextChanged="PasswordTB_TextChanged"
+                     Height="28" Margin="5"/>
+            
             <TextBlock Text="Придумайте пароль" FontSize="20" HorizontalAlignment="Left" Margin="10 0 0 0"/>
-            <TextBox x:Name="PasswordTB" Width="220" Height="28" Margin="10"/>
+            <TextBox x:Name="PasswordTB" TextChanged="PasswordTB_TextChanged"
+                     Width="220" Height="28" Margin="10"/>
+            
             <TextBlock Text="Повторите пароль" FontSize="20" HorizontalAlignment="Left" Margin="10 0 0 0"/>
-            <TextBox x:Name="PasswordRepTB" Width="220" Height="28" Margin="10"/>
+            <TextBox x:Name="PasswordRepTB" TextChanged="PasswordTB_TextChanged"
+                     Width="220" Height="28" Margin="10"/>
+            
             <Button x:Name="RegBtn" Click="RegBtn_Click" IsEnabled="False" 
                     Content="Зарегистрироваться" Height="35" Width="220"/>
         </StackPanel>

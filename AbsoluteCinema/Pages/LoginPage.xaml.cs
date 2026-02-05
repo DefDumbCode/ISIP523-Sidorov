@@ -20,6 +20,7 @@ namespace AbsoluteCinema.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        public static List<Accounts> accounts = Core.Context.Accounts.ToList();
         public LoginPage()
         {
             InitializeComponent();
@@ -32,7 +33,36 @@ namespace AbsoluteCinema.Pages
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            Accounts login_try = accounts.FirstOrDefault(a => a.AccountLogin == FioTB.Text);
+            if (login_try != null)
+            {
+                if(PasswordTB.Text == login_try.AccountPassword)
+                {
+                    MainWindow.User = login_try;
+                    if(NavigationService.CanGoBack)
+                    {
+                        NavigationService.GoBack();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Неправильно введен логин или пароль!");
+                PasswordTB.Text = "";
+            }
+        }
 
+        private void FioTB_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        private void PasswordTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(FioTB.Text) && !String.IsNullOrEmpty(PasswordTB.Text))
+            {
+                LoginBtn.IsEnabled = true;
+            }
         }
     }
 }

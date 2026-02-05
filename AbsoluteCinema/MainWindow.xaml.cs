@@ -20,6 +20,7 @@ namespace AbsoluteCinema
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Accounts User;
         public MainWindow()
         {
             InitializeComponent();
