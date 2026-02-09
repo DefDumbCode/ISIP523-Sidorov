@@ -32,7 +32,8 @@ namespace AbsoluteCinema.Pages
 
         private void FilmsLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            Films film = FilmsLB.SelectedItem as Films;
+            NavigationService.Navigate(new FilmPage(film));  
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)

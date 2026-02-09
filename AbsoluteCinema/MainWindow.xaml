@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbsoluteCinema"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="875">
+        Title="MainWindow" Height="500" Width="880">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

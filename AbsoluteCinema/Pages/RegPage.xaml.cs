@@ -44,6 +44,7 @@ namespace AbsoluteCinema.Pages
                 {
                     MessageBox.Show("Пароль должен иметь длину не менее 8 символов");
                 }
+
             }
             else
             {
