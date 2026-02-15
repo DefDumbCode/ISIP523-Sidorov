@@ -39,10 +39,7 @@ namespace AbsoluteCinema.Pages
                 if(PasswordTB.Text == login_try.AccountPassword)
                 {
                     MainWindow.User = login_try;
-                    if(NavigationService.CanGoBack)
-                    {
-                        NavigationService.GoBack();
-                    }
+                    NavigationService.Navigate(new MainPage());
                 }
             }
             else

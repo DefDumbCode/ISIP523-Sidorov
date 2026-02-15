@@ -41,6 +41,10 @@ namespace AbsoluteCinema.Pages
                     break;
             }
             PriceTB.Text += price.ToString();
+            if(Core.Context.SessionSeat.First(ses => ses.SessionSeatID == _sessionSeat.SessionSeatID).Taken)
+            {
+                ConfirmBtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)

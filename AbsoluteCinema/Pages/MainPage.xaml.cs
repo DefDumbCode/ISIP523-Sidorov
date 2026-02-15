@@ -28,6 +28,14 @@ namespace AbsoluteCinema.Pages
             FilmsLB.ItemsSource = FilmsList;
             SortByCB.ItemsSource = Sorting;
             SortByCB.SelectedIndex = 0;
+            if (MainWindow.User == null)
+            {
+                LogInBtn.Content = "Войти";
+            }
+            else
+            {
+                LogInBtn.Content = "Личный кабинет";
+            }
         }
 
         private void FilmsLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,7 +73,15 @@ namespace AbsoluteCinema.Pages
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new LoginPage());
+            if (MainWindow.User == null)
+            {
+                NavigationService.Navigate(new LoginPage());
+            }
+            else
+            {
+                NavigationService.Navigate(new ProfilePage(MainWindow.User));
+            }
+            
         }
     }
 }
