@@ -24,5 +24,45 @@ namespace Pr15.Pages
         {
             InitializeComponent();
         }
+
+        private void CPUBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GPUBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RAMBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MotherboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CaseBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PowerSupplyBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CoolerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StorageBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
