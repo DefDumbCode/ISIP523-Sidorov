@@ -1,5 +1,4 @@
-﻿using Pr15.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pr15
+namespace Pr15.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для CPUPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CPUPage : Page
     {
-
-        public MainWindow()
+        public static List<basepart_> partsList = Core.Context.basepart_.ToList();
+        public CPUPage(parttype_ part)
         {
             InitializeComponent();
-            MainFrame.NavigationService.Navigate(new MainPage());
+            CPULB.ItemsSource = partsList.Where(p => p.parttypeid == part.id);
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

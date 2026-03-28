@@ -20,6 +20,7 @@ namespace Pr15.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        public static List<parttype_> parttype_s = Core.Context.parttype_.ToList(); 
         public MainPage()
         {
             InitializeComponent();
@@ -27,7 +28,8 @@ namespace Pr15.Pages
 
         private void CPUBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            parttype_ part = parttype_s.FirstOrDefault(p => p.name == "CPU");
+            NavigationService.Navigate(new CPUPage(part));
         }
 
         private void GPUBtn_Click(object sender, RoutedEventArgs e)

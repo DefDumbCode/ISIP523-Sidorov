@@ -27,40 +27,54 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Процессор" Grid.Row="0" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="CPUBtn" Grid.Row="0" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="CPUImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Процессор" Grid.Row="0" Grid.Column="1" Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="CPUBtn" Grid.Row="0" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="CPUBtn_Click"/>
 
-                <TextBlock Text="Графический процессор" Grid.Row="1" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="GPUBtn" Grid.Row="1" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="GPUImg" Grid.Row="1" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Графический процессор" Grid.Row="1" Grid.Column="1" Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="GPUBtn" Grid.Row="1" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="GPUBtn_Click"/>
 
-                <TextBlock Text="ОЗУ" Grid.Row="2" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="RAMBtn" Grid.Row="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="RAMImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="ОЗУ" Grid.Row="2" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="RAMBtn" Grid.Row="2" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="RAMBtn_Click"/>
 
-                <TextBlock Text="Мат. плата" Grid.Row="3" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="MotherboardBtn" Grid.Row="3" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="MotherboardImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Мат. плата" Grid.Row="3" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="MotherboardBtn" Grid.Row="3" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="MotherboardBtn_Click"/>
 
-                <TextBlock Text="Корпус" Grid.Row="4" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="CaseBtn" Grid.Row="4" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="CaseImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Корпус" Grid.Row="4" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="CaseBtn" Grid.Row="4" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="CaseBtn_Click"/>
 
-                <TextBlock Text="Блок питания" Grid.Row="5" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="PowerSupplyBtn" Grid.Row="5" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="PowerSupplyImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Блок питания" Grid.Row="5" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="PowerSupplyBtn" Grid.Row="5" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="PowerSupplyBtn_Click"/>
 
-                <TextBlock Text="Кулер" Grid.Row="6" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="CoolerBtn" Grid.Row="6" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="CoolerImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Кулер" Grid.Row="6" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="CoolerBtn" Grid.Row="6" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="CoolerBtn_Click"/>
 
-                <TextBlock Text="Накопитель" Grid.Row="7" Style="{StaticResource PartSelectTB}"/>
-                <Button x:Name="StorageBtn" Grid.Row="7" Content="Добавить" Style="{StaticResource PartSelectBtn}"
+                <Image x:Name="StorageImg" Grid.Row="0" Grid.Column="0"  Width="40"/>
+                <TextBlock Text="Накопитель" Grid.Row="7" Grid.Column="1"  Style="{StaticResource PartSelectTB}"/>
+                <Button x:Name="StorageBtn" Grid.Row="7" Grid.Column="2" Content="Добавить" Style="{StaticResource PartSelectBtn}"
                         Click="StorageBtn_Click"/>
             </Grid>
         </StackPanel>
-        
+
         <Grid Margin="20 25" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
@@ -77,6 +91,5 @@
             </ListBox>
 
         </Grid>
-        
     </Grid>
 </Page>
