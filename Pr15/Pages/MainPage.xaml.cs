@@ -20,51 +20,25 @@ namespace Pr15.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-        public static List<parttype_> parttype_s = Core.Context.parttype_.ToList(); 
+        public static List<parttype_> parttype_s = Core.Context.parttype_.ToList();
         public MainPage()
         {
             InitializeComponent();
+            PartsLB.ItemsSource = MainWindow.assemble.parts;
+            
+            
         }
 
         private void CPUBtn_Click(object sender, RoutedEventArgs e)
         {
-            parttype_ part = parttype_s.FirstOrDefault(p => p.name == "CPU");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            basepart_ selectedPart = btn.DataContext as basepart_;
+            parttype_ part = parttype_s.FirstOrDefault(p => p.id == selectedPart.parttypeid);
             NavigationService.Navigate(new CPUPage(part));
-        }
-
-        private void GPUBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RAMBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MotherboardBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CaseBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void PowerSupplyBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CoolerBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void StorageBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

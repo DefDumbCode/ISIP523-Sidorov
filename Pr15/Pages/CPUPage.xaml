@@ -9,7 +9,11 @@
       Title="CPUPage">
 
     <Grid>
-        <ListBox x:Name="CPULB">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="75*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="CPULB" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -19,18 +23,21 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="{Binding image}"   
-                               Grid.Column="0" Width="150" Height="150"/>
-                        <TextBlock TextWrapping="Wrap" Grid.Column="1">
+                               Grid.Column="0" Width="150" Height="150" Margin="5 0"/>
+                        <TextBlock Width="250" TextWrapping="Wrap" Grid.Column="1" Margin="5 10">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0}">
                                     <Binding Path="preview"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Button x:Name="AddBtn" Grid.Column="2" Content="Добавить" Click="AddBtn_Click"/>
+                        <Button x:Name="AddBtn" Grid.Column="2" Width="120" Height="75" Content="Добавить" Click="AddBtn_Click" Margin="5"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>        
+        </ListBox>
+
+        <Button x:Name="BackBtn" VerticalAlignment="Top" Click="BackBtn_Click" Content="Назад"
+                Width="120" Height="75" Margin="0 20"/>
     </Grid>
 </Page>

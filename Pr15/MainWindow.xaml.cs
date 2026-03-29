@@ -21,7 +21,7 @@ namespace Pr15
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        public static Assemble assemble = new Assemble();
         public MainWindow()
         {
             InitializeComponent();

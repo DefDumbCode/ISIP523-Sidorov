@@ -29,7 +29,24 @@ namespace Pr15.Pages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button btn = sender as Button;
+            basepart_ selectedPart = btn.DataContext as basepart_;
+            int partIndexToRemove = MainWindow.assemble.parts.IndexOf(MainWindow.assemble.parts.Find(p => p.parttypeid == selectedPart.parttypeid));
+            MainWindow.assemble.parts.RemoveAt(partIndexToRemove);
+            MainWindow.assemble.parts.Insert(partIndexToRemove, selectedPart);
+
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.Navigate(new MainPage());
+            }
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }  
         }
     }
 }
