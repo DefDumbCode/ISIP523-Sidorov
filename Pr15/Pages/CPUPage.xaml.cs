@@ -24,8 +24,8 @@ namespace Pr15.Pages
         public CPUPage(parttype_ part)
         {
             InitializeComponent();
-            CPULB.ItemsSource = Filter(part);
-
+            CPULB.ItemsSource = partsList.Where(p => p.parttypeid == part.id).ToList();
+            
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -50,10 +50,9 @@ namespace Pr15.Pages
             }  
         }
 
-        public List<basepart_> Filter(parttype_ parttype)
+        public bool IsCompatible(basepart_ basepart)
         {
             List<basepart_> assembleParts = MainWindow.assemble.parts;
-            List<basepart_> filtered = partsList.Where(p => p.parttypeid == parttype.id).ToList();
 
             // Получение всех текущих комплектующих сборки
             cpu_ cpu = assembleParts.FirstOrDefault(p => p.parttypeid == 1).cpu_;
@@ -65,21 +64,24 @@ namespace Pr15.Pages
             processorcooler_ processorcooler = assembleParts.FirstOrDefault(p => p.parttypeid == 7).processorcooler_;
             storagedevice_ storagedevice = assembleParts.FirstOrDefault(p => p.parttypeid == 8).storagedevice_;
 
+            bool isCompatible = true;
 
-            switch (parttype.id) 
+            switch (basepart.parttypeid)
             {
                 // CPU
                 case 1:
                     // Фильтрация по сокету процессора и материнской платы
                     if (motherboard != null)
                     {
-                        filtered = filtered.Where(p => p.cpu_.socketid == motherboard.socketid).ToList();
+                        isCompatible &= basepart.cpu_.socketid == motherboard.socketid;
                     }
 
                     // Фильтрация по сокету кулера
                     if (processorcooler != null)
                     {
-                        filtered = filtered.Where(p => p.cpu_.socket_.socketprocessorcooler_ == processorcooler.socketprocessorcooler_).ToList();
+                        isCompatible &= basepart.cpu_.socket_.socketprocessorcooler_
+                            .Where(spc => spc.processorcoolerid == processorcooler.id).ToList()
+                            != new List<socketprocessorcooler_>();
                     }
 
                     break;
@@ -87,14 +89,14 @@ namespace Pr15.Pages
                 case 2:
                     if (powersupply != null)
                     {
-                        filtered = filtered.Where(p => p.gpu_.recommendpower == powersupply.power).ToList();
+                        isCompatible &= basepart.gpu_.recommendpower == powersupply.power;
                     }
                     break;
                 // RAM
                 case 3:
                     if (motherboard != null)
                     {
-                        filtered = filtered.Where(p => p.ram_.memorytypeid == motherboard.memorytypeid).ToList();
+                        isCompatible &= basepart.ram_.memorytypeid == motherboard.memorytypeid;
                     }
                     break;
                 // Motherboard
@@ -102,46 +104,61 @@ namespace Pr15.Pages
                     // Сокеты процессора и материнской платы
                     if (cpu != null)
                     {
-                        filtered = filtered.Where(p => p.motherboard_.socketid == cpu.socketid).ToList();
+                        isCompatible &= basepart.motherboard_.socketid == cpu.socketid;
                     }
 
                     // Сокеты системы охлаждения и материнской платы
                     if (processorcooler != null)
                     {
-                        filtered = filtered.Where(p => p.motherboard_.socket_.socketprocessorcooler_ == processorcooler.socketprocessorcooler_).ToList();
+                        isCompatible &= basepart.motherboard_.socket_.socketprocessorcooler_
+                            .Where(spc => spc.processorcoolerid == processorcooler.id).ToList()
+                            != new List<socketprocessorcooler_>();
                     }
 
                     // Форм-факторы корпуса и материнской платы
                     if (casePC != null)
                     {
-                        filtered = filtered.Where(p => p.motherboard_.formfactor_.boardformfactorcase_ == casePC.boardformfactorcase_).ToList();
+                        isCompatible &= basepart.motherboard_.formfactor_.boardformfactorcase_
+                            .Where(ff => ff.caseid == casePC.id).ToList()
+                            != new List<boardformfactorcase_>();
                     }
 
                     // Тип памяти ОЗУ и материнской платы
                     if (ram != null)
                     {
-                        filtered = filtered.Where(p => p.motherboard_.memorytypeid == ram.memorytypeid).ToList();
+                        isCompatible &= basepart.ram_.memorytypeid == motherboard.memorytypeid;
                     }
                     break;
                 // Case
                 case 5:
                     if (motherboard != null)
                     {
-                        filtered = filtered.Where(f => f.case_.boardformfactorcase_.Contains(b=>b.formfactorid == motherboard.formfactorid)).ToList();
+                        isCompatible &= basepart.case_.boardformfactorcase_
+                            .Where(ff => ff.formfactorid == motherboard.formfactorid).ToList()
+                            != new List<boardformfactorcase_>();
                     }
                     break;
                 // Power supply
                 case 6:
                     if (gpu != null)
                     {
-                        filtered = filtered.Where(p => p.powersupply_.power == gpu.recommendpower).ToList();
+                        isCompatible &= basepart.powersupply_.power == gpu.recommendpower;
                     }
                     break;
                 // Processor cooler
                 case 7:
                     if (cpu != null)
                     {
-                        filtered = filtered.Where(p => p.processorcooler_.socketprocessorcooler_ == cpu.socket_.socketprocessorcooler_).ToList();
+                        isCompatible &= basepart.processorcooler_.socketprocessorcooler_
+                            .Where(spc => spc.socketid == cpu.socketid).ToList()
+                            != new List<socketprocessorcooler_>();
+                    }
+
+                    if (motherboard != null)
+                    {
+                        isCompatible &= basepart.processorcooler_.socketprocessorcooler_
+                            .Where(spc => spc.socketid == motherboard.socketid).ToList()
+                            != new List<socketprocessorcooler_>();
                     }
                     break;
                 // Storage device
@@ -150,8 +167,7 @@ namespace Pr15.Pages
                 default:
                     break;
             }
-
-            return filtered;
+            return isCompatible;
         }
     }
 }
