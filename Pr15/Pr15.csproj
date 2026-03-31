@@ -247,6 +247,14 @@
       <DependentUpon>DebuilderPC.edmx</DependentUpon>
       <LastGenOutput>DebuilderPC.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\cpu.png" />
+    <Resource Include="Images\computer.png" />
+    <Resource Include="Images\fan.png" />
+    <Resource Include="Images\gpu.png" />
+    <Resource Include="Images\hard-disk-drive.png" />
+    <Resource Include="Images\motherboard.png" />
+    <Resource Include="Images\power-supply.png" />
+    <Resource Include="Images\ram.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
