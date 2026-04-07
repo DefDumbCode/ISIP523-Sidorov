@@ -21,7 +21,6 @@ namespace Pr15.Pages
     public partial class MainPage : Page
     {
         public static List<parttype_> parttype_s = Core.Context.parttype_.ToList();
-        public static List<assembly_> assembly_s = Core.Context.assembly_.ToList();
         public static List<partassembly_> partassembly_s  = Core.Context.partassembly_.ToList();
         
         public MainPage()
@@ -58,7 +57,7 @@ namespace Pr15.Pages
             {
                 MainWindow.assemble.author = AuthorTB.Text;
                 MainWindow.assemble.buildName = BuildTB.Text;
-                assembly_ selectedAssembly = assembly_s.FirstOrDefault(a => 
+                assembly_ selectedAssembly = Core.Context.assembly_.ToList().FirstOrDefault(a => 
                 a.name == MainWindow.assemble.buildName && a.author == MainWindow.assemble.author);
 
                 if(selectedAssembly != null)
@@ -72,7 +71,7 @@ namespace Pr15.Pages
                             .FirstOrDefault(p => p.parttypeid == partassembly.basepart_.parttypeid).id;
                     }
                     Core.Context.SaveChanges();
-                    MessageBox.Show("Сборка успешно сохранена");
+                    MessageBox.Show("Сборка успешно изменена");
                 }
                 else
                 {
@@ -82,17 +81,20 @@ namespace Pr15.Pages
                     };
                     Core.Context.assembly_.Add(assembly);
                     Core.Context.SaveChanges();
-                    assembly_s.Add(assembly);
+                    
 
                     foreach (basepart_ part in MainWindow.assemble.parts)
                     {
-                        partassembly_ partassembly = new partassembly_() 
+                        if (part.id != 0)
                         {
-                            assemblyid = assembly.id,
-                            partid = part.id,
-                        };
-                        Core.Context.partassembly_.Add(partassembly);
-                        partassembly_s.Add(partassembly);
+                            partassembly_ partassembly = new partassembly_()
+                            {
+                                assemblyid = assembly.id,
+                                partid = part.id,
+                            };
+                            Core.Context.partassembly_.Add(partassembly);
+                            partassembly_s.Add(partassembly);
+                        }
                     }
                     Core.Context.SaveChanges();
 

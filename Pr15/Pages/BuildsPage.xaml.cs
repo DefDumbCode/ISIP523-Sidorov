@@ -60,7 +60,10 @@ namespace Pr15.Pages
             }
             Core.Context.assembly_.Remove(assembly);
             assembly_s.Remove(assembly);
+            AssemblesLB.ItemsSource = null;
+            AssemblesLB.ItemsSource = assembly_s;
             Core.Context.SaveChanges();
+            
         }
 
         private void AssemblesLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
