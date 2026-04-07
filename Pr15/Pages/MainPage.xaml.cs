@@ -21,17 +21,28 @@ namespace Pr15.Pages
     public partial class MainPage : Page
     {
         public static List<parttype_> parttype_s = Core.Context.parttype_.ToList();
+        public static List<assembly_> assembly_s = Core.Context.assembly_.ToList();
+        public static List<partassembly_> partassembly_s  = Core.Context.partassembly_.ToList();
+        
         public MainPage()
         {
             InitializeComponent();
             PartsLB.ItemsSource = MainWindow.assemble.parts;
-            
+            AuthorTB.Text = MainWindow.assemble.author;
+            BuildTB.Text = MainWindow.assemble.buildName;
+            MainWindow.assemble.IsCompatible();
+            if (MainWindow.assemble.isCompatible)
+            {
+                CompatibleTB.Text = "Сборка пойдёт";
+            }
+            else
+            {
+                CompatibleTB.Text = "Сборка не пойдёт";
+            }
+            PriceTB.Text += MainWindow.assemble.CalculatePrice().ToString();
             
         }
 
-        private void CPUBtn_Click(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -39,6 +50,65 @@ namespace Pr15.Pages
             basepart_ selectedPart = btn.DataContext as basepart_;
             parttype_ part = parttype_s.FirstOrDefault(p => p.id == selectedPart.parttypeid);
             NavigationService.Navigate(new CPUPage(part));
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(!String.IsNullOrEmpty(AuthorTB.Text) && !String.IsNullOrEmpty(BuildTB.Text))
+            {
+                MainWindow.assemble.author = AuthorTB.Text;
+                MainWindow.assemble.buildName = BuildTB.Text;
+                assembly_ selectedAssembly = assembly_s.FirstOrDefault(a => 
+                a.name == MainWindow.assemble.buildName && a.author == MainWindow.assemble.author);
+
+                if(selectedAssembly != null)
+                {
+
+                    List<partassembly_> partassemblies = partassembly_s
+                        .Where(pa => pa.assemblyid == selectedAssembly.id).ToList();
+                    foreach (partassembly_ partassembly in partassemblies)
+                    {
+                        partassembly.partid = MainWindow.assemble.parts
+                            .FirstOrDefault(p => p.parttypeid == partassembly.basepart_.parttypeid).id;
+                    }
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Сборка успешно сохранена");
+                }
+                else
+                {
+                    assembly_ assembly = new assembly_() { 
+                        author = MainWindow.assemble.author, 
+                        name = MainWindow.assemble.buildName 
+                    };
+                    Core.Context.assembly_.Add(assembly);
+                    Core.Context.SaveChanges();
+                    assembly_s.Add(assembly);
+
+                    foreach (basepart_ part in MainWindow.assemble.parts)
+                    {
+                        partassembly_ partassembly = new partassembly_() 
+                        {
+                            assemblyid = assembly.id,
+                            partid = part.id,
+                        };
+                        Core.Context.partassembly_.Add(partassembly);
+                        partassembly_s.Add(partassembly);
+                    }
+                    Core.Context.SaveChanges();
+
+                    MessageBox.Show("Сборка успешно сохранена");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Вы не ввели название сборки или автора");
+            }
+        }
+
+        private void ToBuildsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new BuildsPage());
         }
     }
 }

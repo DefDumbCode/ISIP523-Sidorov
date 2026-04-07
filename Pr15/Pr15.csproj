@@ -118,6 +118,9 @@
     <Compile Include="motherboard_.cs">
       <DependentUpon>DebuilderPC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BuildsPage.xaml.cs">
+      <DependentUpon>BuildsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CPUPage.xaml.cs">
       <DependentUpon>CPUPage.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BuildsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CPUPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

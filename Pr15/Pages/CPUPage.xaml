@@ -37,7 +37,18 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="BackBtn" VerticalAlignment="Top" Click="BackBtn_Click" Content="Назад"
+        <StackPanel>
+            <Label Content="Поиск" FontSize="16" Margin="10" Padding="10 0"/>
+            <TextBox x:Name="SearchTB" 
+                     Width="120" Height="30" Padding="5 0"
+                     FontSize="16" 
+                     TextChanged="SearchTB_TextChanged"/>
+            <Label Content="Производитель" FontSize="16" Margin="10" Padding="10 0"/>
+            <ComboBox x:Name="ManufacturersCB" VerticalAlignment="Top" 
+                      Width="120" Height="35" Margin="10"
+                      SelectionChanged="ManufacturersCB_SelectionChanged"/>
+        </StackPanel>
+        <Button x:Name="BackBtn" VerticalAlignment="Bottom" Click="BackBtn_Click" Content="Назад"
                 Width="120" Height="75" Margin="0 20"/>
     </Grid>
 </Page>
