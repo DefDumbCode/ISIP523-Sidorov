@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ISIP523_Sidorov.Modules.Enemies;
+using ISIP523_Sidorov.Modules.Entities;
+using ISIP523_Sidorov.Modules.Equipment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,49 @@ namespace GameRougelite.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        static Weapon weapon = new Weapon();
+        static Armor armor = new Armor();
+        static Hero hero = new Hero(weapon, armor);
+        static Enemy enemy;
+        
         public MainPage()
         {
             InitializeComponent();
+            while (hero.HP > 0) 
+            {
+                string room = GenerateRoom();
+                if (room == "сундук")
+                {
+
+                }
+            }
         }
+
+
+        private void AtkBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BlockBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private string GenerateRoom()
+        {
+            Random rand = new Random();
+
+            double throws = rand.NextDouble();
+            if (throws >= 0.5)
+            {
+                return "сундук";
+            }
+            else
+            {
+                return "противник";
+            }
+        }
+
     }
 }

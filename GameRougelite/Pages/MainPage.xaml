@@ -11,10 +11,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="45*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
         <Label x:Name="GameNameLbl" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -23,7 +23,7 @@
         <TextBlock x:Name="LevelTB" Grid.Row="1" HorizontalAlignment="Left"
                    Text="Этаж: " FontSize="18"/>
         <ProgressBar x:Name="EnemyHpBar" Grid.Row="1"
-                     Width="300" Height="25"/>
+                     Width="300" Height="20"/>
         <TextBlock x:Name="EnemyHpTB" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
            Text="HP " FontSize="18"/>
 
@@ -38,14 +38,26 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="25*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Инвентарь" FontSize="16"/>
-            
+            <Image x:Name="WeaponImg" Margin="5"/>
+            <Button x:Name="AtkBtn" Grid.Row="1" 
+                    Margin="5"
+                    Click="AtkBtn_Click"/>
+
+            <Image x:Name="ArmorImg" Grid.Column="1" Margin="5"/>
+            <Button x:Name="BlockBtn" Grid.Row="1" Grid.Column="1" 
+                Margin="5"
+                Click="BlockBtn_Click"/>
+
+            <TextBox x:Name="LogsTB" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                     Margin="5"
+                     IsEnabled="False"/>
 
         </Grid>
     </Grid>
