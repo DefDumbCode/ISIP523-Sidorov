@@ -73,21 +73,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\Enemies\Bosses\Arhcimage.cs" />
-    <Compile Include="Modules\Enemies\Bosses\Coval.cs" />
-    <Compile Include="Modules\Enemies\Bosses\Pestov.cs" />
-    <Compile Include="Modules\Enemies\Bosses\VVG.cs" />
-    <Compile Include="Modules\Enemies\Goblin.cs" />
-    <Compile Include="Modules\Enemies\Mag.cs" />
-    <Compile Include="Modules\Enemies\Sekleton.cs" />
-    <Compile Include="Modules\Enemies\Slime.cs" />
-    <Compile Include="Modules\Entities\Enemy.cs" />
-    <Compile Include="Modules\Entities\EntityBase.cs" />
-    <Compile Include="Modules\Entities\Hero.cs" />
-    <Compile Include="Modules\Equipment\Armor.cs" />
-    <Compile Include="Modules\Equipment\Weapon.cs" />
-    <Compile Include="Modules\Factory\NewEnemy.cs" />
-    <Compile Include="Modules\Game.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
