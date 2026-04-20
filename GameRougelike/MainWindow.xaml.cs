@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameRougelike.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace GameRougelike
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.GamePage());
+            MainFrame.Navigate(new StartPage());
         }
     }
 }

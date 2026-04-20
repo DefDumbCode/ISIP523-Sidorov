@@ -67,7 +67,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\EndPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,15 +89,29 @@
     <Compile Include="Modules\Enemies\Mag.cs" />
     <Compile Include="Modules\Enemies\Sekleton.cs" />
     <Compile Include="Modules\Enemies\Slime.cs" />
+    <Compile Include="Modules\Entities\BaseItem.cs" />
     <Compile Include="Modules\Entities\Enemy.cs" />
     <Compile Include="Modules\Entities\EntityBase.cs" />
     <Compile Include="Modules\Entities\Hero.cs" />
+    <Compile Include="Modules\Entities\Room.cs" />
     <Compile Include="Modules\Equipment\Armor.cs" />
+    <Compile Include="Modules\Equipment\Potion.cs" />
     <Compile Include="Modules\Equipment\Weapon.cs" />
     <Compile Include="Modules\Factory\NewEnemy.cs" />
-    <Compile Include="Modules\Game.cs" />
+    <Compile Include="Modules\Factory\Game.cs" />
+    <Compile Include="Modules\Factory\NewRoom.cs" />
+    <Compile Include="Modules\Randomizer.cs" />
+    <Compile Include="Modules\Rooms\BossRoom.cs" />
+    <Compile Include="Modules\Rooms\ChestRoom.cs" />
+    <Compile Include="Modules\Rooms\EnemyRoom.cs" />
+    <Compile Include="Pages\EndPage.xaml.cs">
+      <DependentUpon>EndPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

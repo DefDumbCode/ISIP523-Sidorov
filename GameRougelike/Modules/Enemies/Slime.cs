@@ -10,15 +10,18 @@ namespace ISIP523_Sidorov.Modules.Enemies
     {
         public Slime() 
         {
-            HP = 30;
+            MaxHP = 30;
+            HP = MaxHP;
             ATK = 4;
             DEF = 1;
-            Race = Game.Race.Slime;
+            Race = Race.Slime;
+            EnemyName = "Блёбик";
+            enemyImg = "https://png.klev.club/uploads/posts/2024-06/png-klev-club-wgx5-p-slaimi-slaim-rancher-png-24.png";
         }
 
-        public override void GetDamage(double Dmg)
+        public override string GetDamage(double Dmg)
         {
-            base.GetDamage(Dmg - 2);
+            return base.GetDamage(Dmg - 2);
         }
     }
 }

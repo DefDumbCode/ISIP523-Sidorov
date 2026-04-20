@@ -9,27 +9,21 @@ namespace ISIP523_Sidorov.Modules.Enemies
 {
     public class Sekleton : Enemy
     {
-        public bool IgnoreDEF;
 
         public Sekleton()
         {
-            HP = 50; 
-            ATK = 5;
-            DEF = 1.2;
-            Race = Game.Race.Sekleton;
-            IgnoreDEF = true;
+            MaxHP = 40;
+            HP = MaxHP; 
+            ATK = 10;
+            DEF = 5;
+            Race = Race.Sekleton;
+            EnemyName = "Крутой секлет";
+            enemyImg = "https://cdn-icons-png.flaticon.com/512/7671/7671843.png";
         }
 
-        public override void Attack(Hero Player, bool def, bool dodge)
+        public override string Attack(Hero Player, bool def)
         {
-            if (dodge == false)
-            {
-                Player.GetDamage(ATK);
-            }
-            else
-            {
-                Console.WriteLine("Вы успешно уклонились от атаки");
-            }
+            return Player.GetDamage(ATK);
         }
     }
 }

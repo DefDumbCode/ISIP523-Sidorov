@@ -10,10 +10,12 @@ namespace ISIP523_Sidorov.Modules.Enemies.Bosses
     {
         public Arhcimage()
         {
-            HP = Math.Round(HP * 1.8);
+            EnemyName = "Архимаг C++";
+            MaxHP = Math.Round(HP * 1.8);
+            HP = MaxHP;
             ATK = Math.Round(ATK * 1.6);
             DEF = Math.Round(DEF * 1.1);
-            Freeze += 10;
+            Freeze = 0.15 + 0.1;
         }
     }
 }

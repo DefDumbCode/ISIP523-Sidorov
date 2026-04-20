@@ -1,4 +1,5 @@
-﻿using ISIP523_Sidorov.Modules.Entities;
+﻿using GameRougelike.Modules;
+using ISIP523_Sidorov.Modules.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +13,24 @@ namespace ISIP523_Sidorov.Modules.Enemies.Bosses
         public double Freeze;
         public Pestov()
         {
-            HP = Math.Round(HP * 1.3);
+            EnemyName = "Пестов";
+            MaxHP = Math.Round(HP * 1.3);
+            HP = MaxHP;
             ATK = Math.Round(ATK * 1.8);
             DEF = Math.Round(DEF * 0.6);
-            Freeze = 0.5;
+            Freeze = 0.15 + 0.15;
         }
 
-        public override void Attack(Hero Player, bool def, bool dodge)
+        public override string Attack(Hero Player, bool def)
         {
-            Random rand = new Random();
-            if (dodge == false)
+            string output = "";
+            output += Player.GetDamage(ATK);
+            if (Randomizer.IsCritOrFreezed(Freeze))
             {
-                Player.GetDamage(ATK);
-                if (rand.NextDouble() > 1 - Freeze)
-                {
-                    Console.WriteLine("Вас заморозили! Вы пропускаете ход.");
-                    Attack(Player, true, false);
-                }
+                output += "\nВас заморозили! Вы пропускаете ход.\n";
+                output += Attack(Player, true);
             }
-            else
-            {
-                Console.WriteLine("Вы успешно уклонились от атаки");
-            }
+            return output;
         }
     }
 }

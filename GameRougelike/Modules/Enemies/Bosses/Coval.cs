@@ -10,9 +10,11 @@ namespace ISIP523_Sidorov.Modules.Enemies.Bosses
     {
         public Coval()
         {
-            HP *= 2;
-            ATK = Math.Round(ATK * 1.5);
-            DEF = 1.4;
+            EnemyName = "Ковальски";
+            MaxHP = Math.Round(HP * 2.5);
+            HP = MaxHP;
+            ATK = Math.Round(ATK * 1.3);
+            DEF = Math.Round(DEF * 1.4);
         }
         
     }

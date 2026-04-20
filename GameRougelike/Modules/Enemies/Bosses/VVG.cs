@@ -10,10 +10,12 @@ namespace ISIP523_Sidorov.Modules.Enemies.Bosses
     {
         public VVG()
         {
-            HP *= 2;
-            ATK = Math.Round(6 * 1.5);
-            DEF = 1.2;
-            Crit += 10;
+            EnemyName = "ВВГ";
+            MaxHP = Math.Round(HP * 2);
+            HP = MaxHP;
+            ATK = Math.Round(ATK * 1.5);
+            DEF = Math.Round(DEF * 1.2);
+            Crit = 0.3;
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿<Page x:Class="GameRougelike.Pages.EndPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GameRougelike.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EndPage">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Вы проиграли" FontSize="54" HorizontalAlignment="Center"
+                   Margin="0 0 0 150"/>
+            <Button x:Name="AgainBtn" 
+                    Height="200" Width="500"
+                    Content="Занова" FontSize="30"
+                    Click="AgainBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,4 +1,5 @@
-﻿using ISIP523_Sidorov.Modules.Entities;
+﻿using GameRougelike.Modules;
+using ISIP523_Sidorov.Modules.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,47 +14,44 @@ namespace ISIP523_Sidorov.Modules.Enemies
  
         public Goblin()
         {
-            HP = 65;
-            ATK = 6;
-            DEF = 1;
-            Race = Game.Race.Goblin;
-            Crit = 0.35;
+            MaxHP = 30;
+            HP = MaxHP;
+            ATK = 12;
+            DEF = 3;
+            Race = Race.Goblin;
+            EnemyName = "Гоблин";
+            Crit = 0.20;
+            enemyImg = "https://cdn-icons-png.flaticon.com/512/6721/6721392.png";
         }
 
-        public override void Attack(Hero Player, bool def, bool dodge)
+        public override string Attack(Hero Player, bool def)
         {
-            Random rand = new Random();
-            if (dodge == false)
+            string output = "";
+            if (def == true)
             {
-                if (def == true)
+                if (Randomizer.IsCritOrFreezed(Crit))
                 {
-                    if (rand.NextDouble() > 1 - Crit)
-                    {
-                        Console.WriteLine("Крит!");
-                        Player.GetDamage(ATK * 2 * (Player.Armor.DEF / 100));
-                    }
-                    else
-                    {
-                        Player.GetDamage(ATK * (Player.Armor.DEF / 100));
-                    }
+                    output += "Крит!\n";
+                    output += Player.GetDamage(ATK * 2 * (Player.Armor.DEF / 100));
                 }
                 else
                 {
-                    if (rand.NextDouble() > 1 - Crit)
-                    {
-                        Player.GetDamage(ATK * 2);
-                    }
-                    else
-                    {
-                        Player.GetDamage(ATK);
-                    }
+                    output += Player.GetDamage(ATK * (Player.Armor.DEF / 100));
                 }
             }
             else
             {
-                Console.WriteLine("Вы успешно уклонились от атаки!");
+                if (Randomizer.IsCritOrFreezed(Crit))
+                {
+                    output += "Крит!\n";
+                    output += Player.GetDamage(ATK * 2);
+                }
+                else
+                {
+                    output += Player.GetDamage(ATK);
+                }
             }
-        }
-        
+            return output;
+        }        
     }
 }

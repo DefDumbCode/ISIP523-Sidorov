@@ -8,42 +8,42 @@ using static ISIP523_Sidorov.Modules.Game;
 
 namespace ISIP523_Sidorov.Modules.Enemies
 {
+    public enum Race
+    {
+        Goblin = 1,
+        Sekleton,
+        Mage,
+        Slime
+    }
     public abstract class Enemy
     {
-        
-        public double HP;
-            public double ATK;
-            public double DEF;
-            public Race Race;
+        public double MaxHP { get; set; }
+        public double HP { get; set; }
+        public double ATK;
+        public double DEF;
+        public Race Race;
+        public string EnemyName { get; set; }
+        public string enemyImg { get; set; } 
+        public bool Disabled = true;
 
-        public void EnemyInfo()
+
+        public virtual string GetDamage(double Dmg)
+        {
+            HP = HP - Math.Round(Dmg - Dmg * DEF * 0.1);
+            return $"{EnemyName} получил {Math.Round(Dmg - Dmg * DEF * 0.1)} урона.";
+        }
+
+        public virtual string Attack(Hero Player, bool def)
+        {
+            if (def == true)
             {
-                Console.WriteLine($"{Race}:\n" +
-                    $"ОЗ: {HP}");
+                return Player.GetDamage(ATK * (Player.Armor.DEF / 100));
             }
-
-            public virtual void GetDamage(double Dmg)
-            {
-                Console.WriteLine($"{Race} получил {Math.Round(Dmg / DEF)} урона.");
-                HP = HP - Math.Round(Dmg / DEF);
+            else 
+            { 
+                return Player.GetDamage(ATK); 
             }
-
-            public virtual void Attack(Hero Player, bool def, bool dodge)
-            {
-                if (dodge == false)
-                {
-                    if (def == true)
-                    {
-                        Player.GetDamage(ATK / Player.Armor.DEF);
-                    }
-                    else { Player.GetDamage(ATK); }
-                }
-                else
-                {
-                    Console.WriteLine("Вы успешно уклонились от атаки");
-                }
-            }
-
+        }
     }
  }
 
